@@ -52,7 +52,7 @@ public class JwtTokenUtils implements Serializable {
     /**
 	 * 生成令牌
 	 *
-	 * @param userDetails 用户
+	 * @param
 	 * @return 令牌
 	 */
 	public static String generateToken(Authentication authentication) {
@@ -93,7 +93,7 @@ public class JwtTokenUtils implements Serializable {
 	
 	/**
 	 * 根据请求令牌获取登录认证信息
-	 * @param token 令牌
+	 * @param
 	 * @return 用户名
 	 */
 	public static Authentication getAuthenticationeFromToken(HttpServletRequest request) {
@@ -117,7 +117,7 @@ public class JwtTokenUtils implements Serializable {
 				}
 				Object authors = claims.get(AUTHORITIES);
 				List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
-				if (authors != null && authors instanceof List) {
+				if (authors instanceof List) {
 					for (Object object : (List) authors) {
 						authorities.add(new GrantedAuthorityImpl((String) ((Map) object).get("authority")));
 					}
