@@ -7,7 +7,7 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.lideng.sword.admin.model.request.SysUserCreateDTO;
 import com.lideng.sword.admin.model.request.SysUserUpdateDTO;
-import com.lideng.sword.admin.util.PasswordUtils;
+import com.lideng.sword.common.utils.PasswordUtils;
 import com.lideng.sword.common.utils.IdWorker;
 import com.lideng.sword.core.exception.SwordException;
 import lombok.extern.slf4j.Slf4j;

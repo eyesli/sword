@@ -7,7 +7,7 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 
-import com.lideng.sword.admin.util.PasswordEncoder;
+import com.lideng.sword.common.utils.PasswordEncoder;
 
 /**
  * 身份验证提供者

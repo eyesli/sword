@@ -1,4 +1,4 @@
-package com.lideng.sword.admin.util;
+package com.lideng.sword.common.utils;
 
 import java.security.MessageDigest;
 

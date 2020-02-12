@@ -4,7 +4,6 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
-import javax.servlet.ServletException;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -18,13 +17,11 @@ import com.google.code.kaptcha.Producer;
 import com.lideng.sword.admin.model.entity.SysUser;
 import com.lideng.sword.admin.security.JwtAuthenticatioToken;
 import com.lideng.sword.admin.service.SysUserService;
-import com.lideng.sword.admin.util.PasswordUtils;
+import com.lideng.sword.common.utils.PasswordUtils;
 import com.lideng.sword.admin.util.SecurityUtils;
 import com.lideng.sword.admin.vo.LoginBean;
 import com.lideng.sword.common.utils.IOUtils;
 import com.lideng.sword.core.http.HttpResult;
-
-import static com.lideng.sword.admin.constant.SysConstants.USERNAME;
 
 /**
  * 登录控制器
