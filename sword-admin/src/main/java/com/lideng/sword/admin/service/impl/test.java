@@ -8,6 +8,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.List;
@@ -26,16 +27,11 @@ public class test {
 
     @Test
     public void getHello()  {
-
-        SysRoleMenu sysRoleMenu =new SysRoleMenu();
-        sysRoleMenu.setRoleId("1");
-        sysRoleMenu.setMenuId("2");
-        sysRoleMenu.setId("3");
-        sysRoleMenu.setCreateBy("4");
-        sysRoleMenu.setCreateTime(new Date());
-        sysRoleMenu.setLastUpdateBy("5");
-        sysRoleMenu.setLastUpdateTime(new Date());
-        sysRoleMenu.setVersion(0);
-        int insert = sysRoleMenuMapper.insert(sysRoleMenu);
+//        RedisTemplate<String, Object> template = new RedisTemplate<>();
+//        template.opsForValue().set("1", "lideng");
+//      //  Boolean key1 = template.hasKey("1");
+//       // Object key = template.opsForValue().get("key");
+//
+//       // System.out.println(key1);
     }
 }
