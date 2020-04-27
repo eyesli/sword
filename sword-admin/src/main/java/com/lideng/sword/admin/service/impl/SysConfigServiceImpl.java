@@ -3,8 +3,11 @@ package com.lideng.sword.admin.service.impl;
 import java.util.Date;
 import java.util.List;
 
+import com.lideng.sword.admin.jpa.User;
+import com.lideng.sword.admin.jpa.UserDTO;
 import com.lideng.sword.admin.model.request.SysConfigSaveDTO;
 import com.lideng.sword.admin.model.request.SysConfigUpdateDTO;
+import com.lideng.sword.admin.repository.UserRepository;
 import com.lideng.sword.admin.util.SecurityUtils;
 import com.lideng.sword.common.utils.IdWorker;
 import lombok.extern.slf4j.Slf4j;
@@ -37,6 +40,8 @@ public class SysConfigServiceImpl  implements SysConfigService {
 	@Autowired
 	IdWorker idWorker;
 
+	@Autowired
+	UserRepository UserRepository;
 
 	@Override
 	public int create(SysConfigSaveDTO sysConfigSaveDTO, HttpServletRequest request) {
@@ -77,6 +82,15 @@ public class SysConfigServiceImpl  implements SysConfigService {
 	@Override
 	public SysConfig findById(String id) {
 		return sysConfigMapper.selectByPrimaryKey(id);
+	}
+
+	@Override
+	public List<User> test(String label) {
+		//List<User> all = UserRepository.
+		List userById = UserRepository.findUserById(1L, UserDTO.class);
+		//UserRepository.
+		System.out.println(userById);
+		return null;
 	}
 
 	@Override

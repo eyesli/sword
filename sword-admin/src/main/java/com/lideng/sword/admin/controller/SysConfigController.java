@@ -46,4 +46,9 @@ public class SysConfigController {
 	public HttpResult findByLabel(@RequestParam String label) {
 		return HttpResult.ok(sysConfigService.findByLabel(label));
 	}
+
+	@RequestMapping(value="/test",method = RequestMethod.GET)
+	public HttpResult test(@RequestParam String label) {
+		return HttpResult.ok(sysConfigService.test(label));
+	}
 }

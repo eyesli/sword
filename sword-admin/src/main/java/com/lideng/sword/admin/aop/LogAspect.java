@@ -63,6 +63,7 @@ public class LogAspect {
 
         // 接收到请求，记录请求内容
         ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
+        assert attributes != null;
         HttpServletRequest req = attributes.getRequest();
 
         methodName=joinPoint.getSignature().getDeclaringTypeName() + "." + joinPoint.getSignature().getName();
@@ -79,8 +80,8 @@ public class LogAspect {
      */
     @After("printLog()")
     public void doAfter() {
-        long E_time = System.currentTimeMillis() - startTime;
-        log.info("执行 " + methodName + " 耗时为：" + E_time + "ms");
+        long eTime = System.currentTimeMillis() - startTime;
+        log.info("执行 " + methodName + " 耗时为：" + eTime + "ms");
     }
 
     /**

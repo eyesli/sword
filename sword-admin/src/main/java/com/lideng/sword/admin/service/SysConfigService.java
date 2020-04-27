@@ -1,9 +1,12 @@
 package com.lideng.sword.admin.service;
 
 import java.util.List;
+
+import com.lideng.sword.admin.jpa.User;
 import com.lideng.sword.admin.model.entity.SysConfig;
 import com.lideng.sword.admin.model.request.SysConfigSaveDTO;
 import com.lideng.sword.admin.model.request.SysConfigUpdateDTO;
+
 import javax.servlet.http.HttpServletRequest;
 
 
@@ -52,5 +55,6 @@ public interface SysConfigService  {
 	 */
 	SysConfig findById(String id);
 
+	List<User> test (String label);
 
 }
