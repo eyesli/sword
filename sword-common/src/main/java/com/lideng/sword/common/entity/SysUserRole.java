@@ -1,6 +1,7 @@
-package com.lideng.sword.admin.model.entity;
+package com.lideng.sword.common.entity;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import java.util.Date;
 
@@ -10,11 +11,11 @@ import java.util.Date;
  * @date Sep 13, 2018
  */
 @Data
-public class BaseModel {
+@EqualsAndHashCode(callSuper=false)
+public class SysUserRole {
 
+    private String id;
 
-	private String id;
-	
     private String createBy;
 
     private Date createTime;
@@ -24,4 +25,9 @@ public class BaseModel {
     private Date lastUpdateTime;
 
     private Integer version;
+
+    private String userId;
+
+    private String roleId;
+
 }

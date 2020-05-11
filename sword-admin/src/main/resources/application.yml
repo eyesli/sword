@@ -39,3 +39,13 @@ spring:
     show-sql: true
     #自动创建数据库表 true ：有的话删除创建 false： 有的话直接使用
     generate-ddl: true
+    #设置生成表的字符集和引擎
+    properties:
+      hibernate:
+       dialect: com.lideng.sword.common.utils.MySQL5DialectUTF8
+logging:
+  path: ./
+  file: log.log
+  level:
+    root: info
+

@@ -1,4 +1,4 @@
-package com.lideng.sword.admin.model.entity;
+package com.lideng.sword.common.entity;
 
 import lombok.Data;
 

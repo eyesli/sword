@@ -3,12 +3,15 @@ package com.lideng.sword.admin.service.impl;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import com.lideng.sword.admin.jpa.Teacher;
 import com.lideng.sword.admin.jpa.User;
 import com.lideng.sword.admin.jpa.UserDTO;
 import com.lideng.sword.admin.model.request.SysConfigSaveDTO;
 import com.lideng.sword.admin.model.request.SysConfigUpdateDTO;
+import com.lideng.sword.admin.repository.UserRepository;
 import com.lideng.sword.admin.util.SecurityUtils;
 import com.lideng.sword.common.utils.IdWorker;
 import lombok.extern.slf4j.Slf4j;
@@ -17,7 +20,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.persistence.criteria.*;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.jpa.domain.Specification;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import com.lideng.sword.admin.dao.SysConfigMapper;
@@ -45,7 +52,7 @@ public class SysConfigServiceImpl  implements SysConfigService {
 	IdWorker idWorker;
 
 	@Autowired
-	com.lideng.sword.admin.repository.UserRepository<UserDTO> UserRepository;
+	UserRepository userRepository;
 
 	@Override
 	public int create(SysConfigSaveDTO sysConfigSaveDTO, HttpServletRequest request) {
@@ -90,14 +97,19 @@ public class SysConfigServiceImpl  implements SysConfigService {
 
 	@Override
 	public List<User> test(String label) {
-		//List<User> all = UserRepository.
-		List<UserDTO> userById = UserRepository.findUserById(1L, UserDTO.class);
-		//List t3 = UserRepository.findByTeacher_Name("T3");
-		//System.out.println(t3);
 
-		List<User> all = UserRepository.findAll(createSpecification("stud1", "Tea wang"));
+		//List<User> all = UserRepository.
+		//UserDTO userById = userRepository.findUserById(1L);
+		PageRequest pageRequest = PageRequest.of(0, 1);
+		//Page<List<UserDTO>> userById = userRepository.findUserById("1", UserDTO.class, pageRequest);
+
+
+
+		List<User> all = userRepository.findAll(createSpecification("stud1", "Tea wang"));
 		System.out.println(all);
-		return null;
+		List all1 = userRepository.findAll();
+
+		return all1;
 	}
 
 	@Override

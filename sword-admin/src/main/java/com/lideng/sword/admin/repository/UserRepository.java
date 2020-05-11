@@ -1,12 +1,11 @@
 package com.lideng.sword.admin.repository;
 
 import com.lideng.sword.admin.jpa.User;
-import com.lideng.sword.admin.jpa.UserDTO;
-import org.apache.poi.ss.formula.functions.T;
-import org.springframework.data.jpa.domain.Specification;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
-import org.springframework.data.repository.Repository;
+
 
 import java.util.List;
 
@@ -14,8 +13,8 @@ import java.util.List;
 /**
  * @author lideng
  */
-public interface UserRepository<T> extends JpaRepository<User,Long>, JpaSpecificationExecutor<User> {
+public interface UserRepository extends JpaRepository<User,String>, JpaSpecificationExecutor<User> {
 
-    List<T> findUserById(Long id, Class<T> tClass);
-	
+   // Page<List<T>>findUserById(String id, Class<T> tClass, Pageable var2);
+
 }

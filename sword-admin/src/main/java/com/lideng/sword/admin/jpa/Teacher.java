@@ -1,6 +1,6 @@
 package com.lideng.sword.admin.jpa;
 
-import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;
@@ -11,14 +11,15 @@ import java.util.List;
 @Entity
 @Getter
 @Setter
-@Table(name = "TEACHER")
+@Table(name = "TEACHERS")
+@EqualsAndHashCode
 public class Teacher {
 
     @Id
-    @GeneratedValue
-   // @GenericGenerator(name = "jpa-uuid", strategy = "uuid")
+    @GenericGenerator(name = "idWorker", strategy = "com.lideng.sword.common.utils.IdGenerator" )
+    @GeneratedValue(generator = "idWorker")
     @Column(name = "ID")
-    private Long id;
+    private String id;
 
     @Column(name = "NAME")
     private String name;
