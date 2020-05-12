@@ -1,31 +1,26 @@
 package com.lideng.sword.admin.service.impl;
-import java.util.Date;
 
 import java.util.*;
 
-import com.github.pagehelper.PageHelper;
-import com.github.pagehelper.PageInfo;
+import com.lideng.sword.admin.model.entity.DelStatus;
+import com.lideng.sword.admin.model.entity.SysUser;
 import com.lideng.sword.admin.model.request.SysUserCreateDTO;
 import com.lideng.sword.admin.model.request.SysUserUpdateDTO;
+import com.lideng.sword.admin.repository.UserRepository;
 import com.lideng.sword.common.utils.PasswordUtils;
-import com.lideng.sword.common.utils.IdWorker;
 import com.lideng.sword.core.exception.SwordException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import com.lideng.sword.admin.dao.SysUserMapper;
-import com.lideng.sword.admin.dao.SysUserRoleMapper;
-import com.lideng.sword.admin.entity.SysMenu;
-import com.lideng.sword.admin.model.entity.SysUser;
-import com.lideng.sword.admin.model.entity.SysUserRole;
+
+import com.lideng.sword.admin.model.entity.SysMenu;
+
 import com.lideng.sword.admin.service.SysMenuService;
 import com.lideng.sword.admin.service.SysUserService;
-import javax.servlet.http.HttpServletRequest;
 
 import static com.lideng.sword.admin.constant.SysConstants.ADMIN;
-import static com.lideng.sword.admin.constant.SysConstants.USERNAME;
 
 @Slf4j
 @Service
@@ -36,25 +31,20 @@ import static com.lideng.sword.admin.constant.SysConstants.USERNAME;
  */
 public class SysUserServiceImpl  implements SysUserService {
 
-    @Autowired
-    private IdWorker idWorker;
-
 	@Autowired
-	private SysUserMapper sysUserMapper;
+	private UserRepository userRepository;
+
 
 	@Autowired
 	private SysMenuService sysMenuService;
 
-	@Autowired
-	private SysUserRoleMapper sysUserRoleMapper;
-
 
 	@Override
-	public String create(SysUserCreateDTO record, HttpServletRequest request) {
+	public String create(SysUserCreateDTO record) {
 
 		//传了部门ID和role ID，role ID没地方放
 		SysUser sysUser=new SysUser();
-		if(sysUserMapper.findByName(record.getName())!=null) {
+		if(userRepository.findByName(record.getName()).isPresent()) {
 			throw new SwordException("角色名已存在!");
 		}
 		BeanUtils.copyProperties(record,sysUser);
@@ -62,30 +52,17 @@ public class SysUserServiceImpl  implements SysUserService {
 		String password = PasswordUtils.encode(sysUser.getPassword(), salt);
 		sysUser.setSalt(salt);
 		sysUser.setPassword(password);
-		sysUser.setId(idWorker.nextId() + "");
-		sysUser.setCreateBy((String) request.getSession().getAttribute(USERNAME.getValue()));
-		sysUser.setCreateTime(new Date());
-		sysUser.setDelFlag(false);
+		sysUser.setDelFlag(DelStatus.NORMAL);
 		sysUser.setVersion(0);
-		sysUserMapper.insert(sysUser);
+		sysUser.setRoleId(record.getRoleId());
 
-		//插入角色ID
-		SysUserRole sysUserRole = new SysUserRole();
-		sysUserRole.setUserId(sysUser.getId());
-		sysUserRole.setRoleId(record.getRoleId());
-		sysUserRole.setId(idWorker.nextId() + "");
-		sysUserRole.setCreateBy((String) request.getSession().getAttribute(USERNAME.getValue()));
-		sysUserRole.setCreateTime(new Date());
-		sysUserRoleMapper.insert(sysUserRole);
-
-		//返回ID
-		return sysUser.getId();
+		return userRepository.save(sysUser).getId();
 	}
 
 	@Override
-	public String update(SysUserUpdateDTO record, HttpServletRequest request) {
+	public String update(SysUserUpdateDTO record) {
 
-		SysUser sysUser = sysUserMapper.selectByPrimaryKey(record.getId());
+		SysUser sysUser = userRepository.getOne(record.getId());
 
 		if(ADMIN.getValue().equals(sysUser.getName())) {
 			throw new SwordException("超级管理员不允许修改!");
@@ -95,12 +72,9 @@ public class SysUserServiceImpl  implements SysUserService {
 			record.setPassword(password);
 		}
 		BeanUtils.copyProperties(record,sysUser);
-		sysUser.setLastUpdateBy((String) request.getSession().getAttribute(USERNAME.getValue()));
-		sysUser.setLastUpdateTime(new Date());
 		sysUser.setVersion(sysUser.getVersion()+1);
-		log.info(sysUser.toString());
-		sysUserMapper.updateByPrimaryKey(sysUser);
-		return sysUser.getId();
+
+		return userRepository.save(sysUser).getId();
 	}
 
 	@Override
@@ -108,27 +82,22 @@ public class SysUserServiceImpl  implements SysUserService {
 
 		//感觉不优雅，先放着吧
 		for(String id:ids) {
-			SysUser sysUser = sysUserMapper.selectByPrimaryKey(id);
-			if(sysUser != null && ADMIN.getValue().equalsIgnoreCase(sysUser.getName())) {
+			SysUser sysUser = userRepository.getOne(id);
+			if(ADMIN.getValue().equalsIgnoreCase(sysUser.getName())) {
 				throw new SwordException("超级管理员不允许删除!");
 			}
 		}
 		//软删除 更新del_flag字段
-		ids.forEach(id->sysUserMapper.deleteByPrimaryKey(id));
+		ids.forEach(id->userRepository.deleteById(id));
 		return ids.size();
 	}
 
 	@Override
 	public SysUser findByName(String name) {
-		return sysUserMapper.findByName(name);
+		return userRepository.findByName(name).orElseThrow(NoSuchElementException::new);
 	}
 
-	@Override
-	public PageInfo<SysUser> findUserPage(Integer page, Integer size) {
-		PageHelper.startPage(page, size);
-		List<SysUser> userList = sysUserMapper.findAll();
-		return new PageInfo<>(userList);
-	}
+
 
 	@Override
 	public Set<String> findPermissions(String userName) {	
@@ -142,9 +111,9 @@ public class SysUserServiceImpl  implements SysUserService {
 		return perms;
 	}
 
-	@Override
-	public List<SysUserRole> findUserRoles(String userId) {
-		return sysUserRoleMapper.findUserRoles(userId);
-	}
+//	@Override
+//	public List<SysRole> findUserRoles(String userId) {
+//		return userRepository.findById(userId).get().getSysRole();
+//	}
 
 }

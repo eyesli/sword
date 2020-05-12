@@ -1,5 +1,6 @@
-package com.lideng.sword.admin.entity;
+package com.lideng.sword.admin.model.entity;
 
+import com.lideng.sword.admin.model.entity.User;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;

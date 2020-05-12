@@ -1,32 +1,23 @@
 package com.lideng.sword.admin.service.impl;
 
-import java.util.Date;
 import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
 
 import com.lideng.sword.admin.model.request.SysRoleCreateDTO;
 import com.lideng.sword.admin.model.request.SysRoleMenuCreateDTO;
 import com.lideng.sword.admin.model.request.SysRoleUpdateDTO;
 import com.lideng.sword.admin.repository.MenuRepository;
 import com.lideng.sword.admin.repository.RoleRepository;
-import com.lideng.sword.common.utils.IdWorker;
 import com.lideng.sword.core.exception.SwordException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import com.lideng.sword.admin.dao.SysMenuMapper;
-import com.lideng.sword.admin.dao.SysRoleMapper;
-import com.lideng.sword.admin.dao.SysRoleMenuMapper;
-import com.lideng.sword.admin.entity.SysMenu;
-import com.lideng.sword.admin.entity.SysRole;
-import com.lideng.sword.admin.model.entity.SysRoleMenu;
+import com.lideng.sword.admin.model.entity.SysMenu;
+import com.lideng.sword.admin.model.entity.SysRole;
 import com.lideng.sword.admin.service.SysRoleService;
-import javax.servlet.http.HttpServletRequest;
+
 import static com.lideng.sword.admin.constant.SysConstants.ADMIN;
-import static com.lideng.sword.admin.constant.SysConstants.USERNAME;
 
 @Slf4j
 @Service
@@ -79,7 +70,8 @@ public class SysRoleServiceImpl  implements SysRoleService {
 
 	@Override
 	public List<SysRole> findAll() {
-		return roleRepository.findAll();
+		List<SysRole> all = roleRepository.findAll();
+		return all;
 	}
 
 
@@ -96,9 +88,6 @@ public class SysRoleServiceImpl  implements SysRoleService {
 	@Override
 	public int saveRoleMenus(List<SysRoleMenuCreateDTO> records) {
 
-        /**
-         * roleId 对应多个menu ID
-         */
 		String roleId = records.get(0).getRoleId();
 		List<String> menuIdList = records.get(0).getMenuId();
 		SysRole sysRole = roleRepository.getOne(roleId);

@@ -1,22 +1,17 @@
 package com.lideng.sword.admin.service.impl;
 
-import java.util.Date;
 import java.util.List;
 
 import com.lideng.sword.admin.model.request.SysDictCreateDTO;
 import com.lideng.sword.admin.model.request.SysDictUpdateDTO;
 import com.lideng.sword.admin.repository.DictRepository;
-import com.lideng.sword.common.utils.IdWorker;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.lideng.sword.admin.dao.SysDictMapper;
-import com.lideng.sword.admin.entity.SysDict;
+import com.lideng.sword.admin.model.entity.SysDict;
 import com.lideng.sword.admin.service.SysDictService;
 import org.springframework.transaction.annotation.Transactional;
-import javax.servlet.http.HttpServletRequest;
-import static com.lideng.sword.admin.constant.SysConstants.USERNAME;
 
 
 @Slf4j

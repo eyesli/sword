@@ -1,13 +1,22 @@
 package com.lideng.sword.admin.model.entity;
 
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import com.lideng.sword.admin.model.entity.BaseModel;
+import lombok.Getter;
+import lombok.Setter;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+
+import javax.persistence.Entity;
+import javax.persistence.EntityListeners;
+import javax.persistence.Table;
 
 /**
  * @author lideng
  */
-@Data
-@EqualsAndHashCode(callSuper=false)
+@Entity
+@Getter
+@Setter
+@Table(name = "sys_config")
+@EntityListeners(AuditingEntityListener.class)
 public class SysConfig extends BaseModel {
 
     private String value;
@@ -21,10 +30,5 @@ public class SysConfig extends BaseModel {
     private String sort;
 
     private String remarks;
-
-    /**
-     * false代表删除，true代表正常
-     */
-    private boolean delFlag;
 
 }

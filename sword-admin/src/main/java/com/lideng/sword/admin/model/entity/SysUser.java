@@ -1,26 +1,30 @@
 package com.lideng.sword.admin.model.entity;
 
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.Getter;
+import lombok.Setter;
+import org.hibernate.envers.Audited;
+import org.hibernate.envers.RelationTargetAuditMode;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-import java.util.ArrayList;
-import java.util.List;
+import javax.persistence.*;
+
 /**
  * 基础模型
  * @author lideng
  * @date Sep 13, 2018
  */
-@Data
-@EqualsAndHashCode(callSuper=false)
+@Entity
+@Getter
+@Setter
+@Table(name = "sys_user")
+@EntityListeners(AuditingEntityListener.class)
 public class SysUser extends BaseModel {
 
     private String name;
 
     private String nickName;
 
-    /**
-     * 头像
-     */
     private String avatar;
 
     private String password;
@@ -31,28 +35,16 @@ public class SysUser extends BaseModel {
 
     private String mobile;
 
-    /**
-     * 账号的状态0：禁用 1：正常
-     */
-    private boolean status;
+    @Column(name = "role_id")
+    private String roleId;
 
-    private String deptId;
+    @Enumerated(EnumType.ORDINAL)
+    private AccountStatus status;
 
-    private boolean delFlag;
-
-    /**
-     * 非数据库字段
-     */
-    private String deptName;
-    /**
-     * 非数据库字段
-     */
-    private String roleNames;
-    /**
-     * 非数据库字段
-     */
-    private List<SysUserRole> userRoles = new ArrayList<>();
-
-
+    @JsonIgnore
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "role_id",insertable = false, updatable = false)
+    @Audited(targetAuditMode = RelationTargetAuditMode.NOT_AUDITED)
+    private SysRole sysRole;
 
 }

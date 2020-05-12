@@ -1,4 +1,4 @@
-package com.lideng.sword.admin.entity;
+package com.lideng.sword.admin.model.entity;
 
 /**
  * 常量管理

@@ -8,11 +8,8 @@ import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
-import com.lideng.sword.admin.constant.SysConstants;
-import com.lideng.sword.admin.model.entity.SysUser;
 import com.lideng.sword.admin.service.SysUserService;
 import com.lideng.sword.core.http.HttpResult;
-import javax.servlet.http.HttpServletRequest;
 
 /**
  * 用户控制器
@@ -28,14 +25,14 @@ public class SysUserController {
 
 	@PreAuthorize("hasAuthority('sys:user:add') AND hasAuthority('sys:user:edit')")
     @RequestMapping(value="/create",method = RequestMethod.POST)
-	public HttpResult create(@RequestBody SysUserCreateDTO record, HttpServletRequest request) {
-		return HttpResult.ok(sysUserService.create(record,request),"创建成功");
+	public HttpResult create(@RequestBody SysUserCreateDTO record) {
+		return HttpResult.ok(sysUserService.create(record),"创建成功");
 	}
 
 	@PreAuthorize("hasAuthority('sys:user:add') AND hasAuthority('sys:user:edit')")
     @RequestMapping(value="/update",method = RequestMethod.POST)
-	public HttpResult update(@RequestBody SysUserUpdateDTO record, HttpServletRequest request) {
-		return HttpResult.ok(sysUserService.update(record,request),"更新成功");
+	public HttpResult update(@RequestBody SysUserUpdateDTO record) {
+		return HttpResult.ok(sysUserService.update(record),"更新成功");
 	}
 
 	@PreAuthorize("hasAuthority('sys:user:delete')")
@@ -56,17 +53,12 @@ public class SysUserController {
 		return HttpResult.ok(sysUserService.findPermissions(name));
 	}
 	
-	@PreAuthorize("hasAuthority('sys:user:view')")
-    @RequestMapping(value="/findUserRoles",method = RequestMethod.GET)
-	public HttpResult findUserRoles(@RequestParam String userId) {
-		return HttpResult.ok(sysUserService.findUserRoles(userId));
-	}
+//	@PreAuthorize("hasAuthority('sys:user:view')")
+//    @RequestMapping(value="/findUserRoles",method = RequestMethod.GET)
+//	public HttpResult findUserRoles(@RequestParam String userId) {
+//		return HttpResult.ok(sysUserService.findUserRoles(userId));
+//	}
 
-    @PreAuthorize("hasAuthority('sys:user:view')")
-    @RequestMapping(value="/userPage",method = RequestMethod.GET)
-    public HttpResult findUserPage( @RequestParam(value = "page")Integer page,
-                                    @RequestParam(value = "size") Integer size) {
-        return HttpResult.ok(sysUserService.findUserPage(page,size),"查询所有的USER pageInfo");
-    }
+
 	
 }

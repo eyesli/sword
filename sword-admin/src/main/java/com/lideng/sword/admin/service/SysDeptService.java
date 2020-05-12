@@ -3,10 +3,9 @@ package com.lideng.sword.admin.service;
 import java.util.List;
 
 
-import com.lideng.sword.admin.entity.SysDept;
+import com.lideng.sword.admin.model.entity.SysDept;
 import com.lideng.sword.admin.model.request.SysDeptCreateDTO;
 import com.lideng.sword.admin.model.request.SysDeptUpdateDTO;
-import javax.servlet.http.HttpServletRequest;
 
 
 /**

@@ -1,8 +1,7 @@
 package com.lideng.sword.admin.repository;
 
 
-import com.lideng.sword.admin.entity.SysDept;
-import com.lideng.sword.admin.entity.SysRole;
+import com.lideng.sword.admin.model.entity.SysDept;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 

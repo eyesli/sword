@@ -1,9 +1,8 @@
 package com.lideng.sword.admin.service.impl;
 
-import com.lideng.sword.admin.dao.SysRoleMenuMapper;
-import com.lideng.sword.admin.entity.DelStatus;
-import com.lideng.sword.admin.entity.SysRole;
-import com.lideng.sword.admin.entity.SysUser;
+import com.lideng.sword.admin.model.entity.DelStatus;
+import com.lideng.sword.admin.model.entity.SysRole;
+import com.lideng.sword.admin.model.entity.SysUser;
 import com.lideng.sword.admin.repository.RoleRepository;
 import com.lideng.sword.common.utils.IdWorker;
 import org.junit.Test;
@@ -11,8 +10,6 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
-
-import java.util.Optional;
 
 /**
  * @author lideng
@@ -22,8 +19,6 @@ import java.util.Optional;
 @SpringBootTest
 public class test {
 
-    @Autowired
-    private SysRoleMenuMapper sysRoleMenuMapper;
 
     @Autowired
     com.lideng.sword.admin.repository.UserRepository userRepository;

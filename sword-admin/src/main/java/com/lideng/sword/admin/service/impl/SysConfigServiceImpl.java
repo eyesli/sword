@@ -1,36 +1,29 @@
 package com.lideng.sword.admin.service.impl;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-import java.util.NoSuchElementException;
 
-import com.lideng.sword.admin.entity.*;
+import com.lideng.sword.admin.model.entity.DelStatus;
+import com.lideng.sword.admin.model.entity.SysConfig;
+import com.lideng.sword.admin.model.entity.Teacher;
+import com.lideng.sword.admin.model.entity.User;
 import com.lideng.sword.admin.model.request.SysConfigSaveDTO;
 import com.lideng.sword.admin.model.request.SysConfigUpdateDTO;
 import com.lideng.sword.admin.repository.ConfigRepository;
 import com.lideng.sword.admin.repository.MenuRepository;
 import com.lideng.sword.admin.repository.RoleRepository;
 import com.lideng.sword.admin.repository.UserRepository;
-import com.lideng.sword.admin.util.SecurityUtils;
-import com.lideng.sword.common.utils.IdWorker;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.persistence.criteria.*;
 
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
-import com.lideng.sword.admin.dao.SysConfigMapper;
 import com.lideng.sword.admin.service.SysConfigService;
 import org.springframework.transaction.annotation.Transactional;
-
-import javax.servlet.http.HttpServletRequest;
-
-import static com.lideng.sword.admin.constant.SysConstants.USERNAME;
 
 @Slf4j
 @Service
@@ -87,28 +80,28 @@ public class SysConfigServiceImpl  implements SysConfigService {
 	@Override
 	public List<User> test(String label) {
 
-		//List<User> all = UserRepository.
-		SysUser sysUser1 = userRepository.findById("1260081237888995328").orElseThrow(NoSuchElementException::new);
-
-
-		SysUser sysUser = new SysUser();
-		sysUser.setName("sysUser4");
-		sysUser.setVersion(0);
-		List<String> list= new ArrayList<String>();
-		list.add("3");
-		list.add("4");
-
-		List<SysMenu> allById = menuRepository.findAllById(list);
-
-
-		SysRole sysRole = new SysRole();
-
-		sysRole.setName("天堂经理");
-		sysRole.setSysMenu(allById);
-		SysRole save = roleRepository.save(sysRole);
-		PageRequest pageRequest = PageRequest.of(0, 1);
-		//Page<List<UserDTO>> userById = userRepository.findUserById("1", UserDTO.class, pageRequest);
-
+//		//List<User> all = UserRepository.
+//		SysUser sysUser1 = userRepository.findById("1260081237888995328").orElseThrow(NoSuchElementException::new);
+//
+//
+//		SysUser sysUser = new SysUser();
+//		sysUser.setName("sysUser4");
+//		sysUser.setVersion(0);
+//		List<String> list= new ArrayList<String>();
+//		list.add("3");
+//		list.add("4");
+//
+//		List<SysMenu> allById = menuRepository.findAllById(list);
+//
+//
+//		SysRole sysRole = new SysRole();
+//
+//		sysRole.setName("天堂经理");
+//		sysRole.setSysMenu(allById);
+//		SysRole save = roleRepository.save(sysRole);
+//		PageRequest pageRequest = PageRequest.of(0, 1);
+//		//Page<List<UserDTO>> userById = userRepository.findUserById("1", UserDTO.class, pageRequest);
+//
 
 
 //		List<User> all = userRepository.findAll(createSpecification("stud1", "Tea wang"));

@@ -1,14 +1,12 @@
 package com.lideng.sword.admin.service;
 
 import java.util.List;
-import java.util.Map;
 
-import com.lideng.sword.admin.entity.SysMenu;
-import com.lideng.sword.admin.entity.SysRole;
+import com.lideng.sword.admin.model.entity.SysMenu;
+import com.lideng.sword.admin.model.entity.SysRole;
 import com.lideng.sword.admin.model.request.SysRoleCreateDTO;
 import com.lideng.sword.admin.model.request.SysRoleMenuCreateDTO;
 import com.lideng.sword.admin.model.request.SysRoleUpdateDTO;
-import javax.servlet.http.HttpServletRequest;
 
 
 /**

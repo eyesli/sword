@@ -1,6 +1,5 @@
 package com.lideng.sword.admin.config;
 
-import com.lideng.sword.admin.model.entity.SysConfig;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.annotation.MapperScan;

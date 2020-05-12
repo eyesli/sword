@@ -1,26 +1,21 @@
 package com.lideng.sword.admin.service.impl;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
-import com.lideng.sword.admin.entity.MenuType;
+import com.lideng.sword.admin.model.entity.MenuType;
 import com.lideng.sword.admin.model.request.SysMenuCreateDTO;
 import com.lideng.sword.admin.model.request.SysMenuUpdateDTO;
 import com.lideng.sword.admin.repository.MenuRepository;
-import com.lideng.sword.common.utils.IdWorker;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.lideng.sword.admin.constant.SysConstants;
-import com.lideng.sword.admin.dao.SysMenuMapper;
-import com.lideng.sword.admin.entity.SysMenu;
+import com.lideng.sword.admin.model.entity.SysMenu;
 import com.lideng.sword.admin.service.SysMenuService;
 import org.springframework.transaction.annotation.Transactional;
-import javax.servlet.http.HttpServletRequest;
-import static com.lideng.sword.admin.constant.SysConstants.USERNAME;
 
 @Slf4j
 @Service
@@ -89,7 +84,7 @@ public class SysMenuServiceImpl implements SysMenuService {
 		if(StringUtils.isBlank(userName) || SysConstants.ADMIN.getValue().equalsIgnoreCase(userName)) {
 			return menuRepository.findAll();
 		}
-		return menuRepository.findByUserName(userName);
+		return menuRepository.findByName(userName);
 	}
 
 	private void findChildren(List<SysMenu> SysMenus, List<SysMenu> menus, int menuType) {

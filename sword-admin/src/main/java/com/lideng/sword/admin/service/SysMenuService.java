@@ -2,12 +2,9 @@ package com.lideng.sword.admin.service;
 
 import java.util.List;
 
-import com.lideng.sword.admin.entity.SysMenu;
+import com.lideng.sword.admin.model.entity.SysMenu;
 import com.lideng.sword.admin.model.request.SysMenuCreateDTO;
 import com.lideng.sword.admin.model.request.SysMenuUpdateDTO;
-
-
-import javax.servlet.http.HttpServletRequest;
 
 
 /**
