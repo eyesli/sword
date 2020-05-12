@@ -28,14 +28,14 @@ public class SysRoleController {
 
 	@PreAuthorize("hasAuthority('sys:role:add') AND hasAuthority('sys:role:edit')")
 	@RequestMapping(value="/create",method = RequestMethod.POST)
-	public HttpResult create(@RequestBody SysRoleCreateDTO record, HttpServletRequest request) {
-		return HttpResult.ok(sysRoleService.create(record,request));
+	public HttpResult create(@RequestBody SysRoleCreateDTO record) {
+		return HttpResult.ok(sysRoleService.create(record));
 	}
 
 	@PreAuthorize("hasAuthority('sys:config:add') AND hasAuthority('sys:config:edit')")
 	@RequestMapping(value="/update",method = RequestMethod.POST)
-	public HttpResult update(@RequestBody SysRoleUpdateDTO record, HttpServletRequest request) {
-		return HttpResult.ok(sysRoleService.update(record,request));
+	public HttpResult update(@RequestBody SysRoleUpdateDTO record ) {
+		return HttpResult.ok(sysRoleService.update(record));
 	}
 
 	@PreAuthorize("hasAuthority('sys:role:delete')")
@@ -56,14 +56,10 @@ public class SysRoleController {
 		return HttpResult.ok(sysRoleService.findRoleMenus(roleId));
 	}
 
-	@RequestMapping(value="/findRoleAll",method = RequestMethod.GET)
-	public HttpResult findRoleAll() {
-		return HttpResult.ok(sysRoleService.findA(),"测试复杂查询，返回一个map");
-	}
 
 	@PreAuthorize("hasAuthority('sys:role:view')")
 	@RequestMapping(value="/saveRoleMenus",method = RequestMethod.POST)
-	public HttpResult saveRoleMenus(@RequestBody List<SysRoleMenuCreateDTO> records,HttpServletRequest request) {
-		return HttpResult.ok(sysRoleService.saveRoleMenus(records,request),"保存成功");
+	public HttpResult saveRoleMenus(@RequestBody List<SysRoleMenuCreateDTO> records) {
+		return HttpResult.ok(sysRoleService.saveRoleMenus(records),"保存成功");
 	}
 }

@@ -2,8 +2,9 @@ package com.lideng.sword.admin.service;
 
 import java.util.List;
 
+import com.lideng.sword.admin.entity.SysConfig;
 import com.lideng.sword.admin.entity.User;
-import com.lideng.sword.admin.model.entity.SysConfig;
+
 import com.lideng.sword.admin.model.request.SysConfigSaveDTO;
 import com.lideng.sword.admin.model.request.SysConfigUpdateDTO;
 
@@ -27,19 +28,19 @@ public interface SysConfigService  {
 	/**
 	 * 创建操作
 	 * @param record
-	 * @param request
+	 * @param
 	 * @return
 	 */
-	int create(SysConfigSaveDTO record, HttpServletRequest request);
+	String create(SysConfigSaveDTO record);
 
 
 	/**
 	 * 保存操作
 	 * @param record
-	 * @param request
+	 * @param
 	 * @return
 	 */
-	int update(SysConfigUpdateDTO record,HttpServletRequest request);
+	String update(SysConfigUpdateDTO record);
 
 
 	/**

@@ -26,6 +26,9 @@ public class SysMenu extends BaseModel {
 
     private String url;
 
+    private String parentId;
+
+
     /**
      * 权限标识
      */
@@ -37,5 +40,15 @@ public class SysMenu extends BaseModel {
     private String icon;
 
     private Integer orderNum;
+
+
+    @Transient
+    private String parentName;
+
+    @Transient
+    private Integer level;
+
+    @Transient
+    private List<SysMenu> children;
 
 }

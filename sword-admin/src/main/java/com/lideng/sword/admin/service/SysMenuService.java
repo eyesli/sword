@@ -2,7 +2,7 @@ package com.lideng.sword.admin.service;
 
 import java.util.List;
 
-import com.lideng.sword.admin.model.entity.SysMenu;
+import com.lideng.sword.admin.entity.SysMenu;
 import com.lideng.sword.admin.model.request.SysMenuCreateDTO;
 import com.lideng.sword.admin.model.request.SysMenuUpdateDTO;
 
@@ -33,9 +33,9 @@ public interface SysMenuService  {
 	List<SysMenu> findByUser(String userName);
 
 
-	int create(SysMenuCreateDTO record, HttpServletRequest request);
+	String create(SysMenuCreateDTO record);
 
-	int update(SysMenuUpdateDTO record, HttpServletRequest request);
+	String update(SysMenuUpdateDTO record);
 
 	int delete(List<String> ids);
 

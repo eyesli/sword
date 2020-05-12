@@ -25,14 +25,14 @@ public class SysDictController {
 	
 	@PreAuthorize("hasAuthority('sys:dict:add') AND hasAuthority('sys:dict:edit')")
 	@PostMapping(value="/create")
-	public HttpResult create(@RequestBody SysDictCreateDTO record, HttpServletRequest request) {
-		return HttpResult.ok(sysDictService.create(record,request));
+	public HttpResult create(@RequestBody SysDictCreateDTO record) {
+		return HttpResult.ok(sysDictService.create(record));
 	}
 
 	@PreAuthorize("hasAuthority('sys:config:add') AND hasAuthority('sys:config:edit')")
 	@RequestMapping(value="/update",method = RequestMethod.POST)
 	public HttpResult update(@RequestBody SysDictUpdateDTO record, HttpServletRequest request) {
-		return HttpResult.ok(sysDictService.update(record,request));
+		return HttpResult.ok(sysDictService.update(record));
 	}
 
 	@PreAuthorize("hasAuthority('sys:dict:delete')")

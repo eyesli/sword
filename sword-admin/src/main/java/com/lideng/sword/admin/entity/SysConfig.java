@@ -32,5 +32,4 @@ public class SysConfig extends BaseModel {
 
     private String remarks;
 
-
 }

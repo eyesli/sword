@@ -25,14 +25,14 @@ public class SysConfigController {
 	
 	@PreAuthorize("hasAuthority('sys:config:add') AND hasAuthority('sys:config:edit')")
 	@RequestMapping(value="/create",method = RequestMethod.POST)
-	public HttpResult create(@RequestBody SysConfigSaveDTO record, HttpServletRequest request) {
-		return HttpResult.ok(sysConfigService.create(record, request),"创建成功");
+	public HttpResult create(@RequestBody SysConfigSaveDTO record) {
+		return HttpResult.ok(sysConfigService.create(record),"创建成功");
 	}
 
 	@PreAuthorize("hasAuthority('sys:config:add') AND hasAuthority('sys:config:edit')")
 	@RequestMapping(value="/update",method = RequestMethod.POST)
-	public HttpResult update(@RequestBody SysConfigUpdateDTO record,HttpServletRequest request) {
-		return HttpResult.ok(sysConfigService.update(record,request),"更新成功");
+	public HttpResult update(@RequestBody SysConfigUpdateDTO record) {
+		return HttpResult.ok(sysConfigService.update(record),"更新成功");
 	}
 
 	@PreAuthorize("hasAuthority('sys:config:delete')")

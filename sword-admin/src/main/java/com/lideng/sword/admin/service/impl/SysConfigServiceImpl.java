@@ -8,6 +8,7 @@ import java.util.NoSuchElementException;
 import com.lideng.sword.admin.entity.*;
 import com.lideng.sword.admin.model.request.SysConfigSaveDTO;
 import com.lideng.sword.admin.model.request.SysConfigUpdateDTO;
+import com.lideng.sword.admin.repository.ConfigRepository;
 import com.lideng.sword.admin.repository.MenuRepository;
 import com.lideng.sword.admin.repository.RoleRepository;
 import com.lideng.sword.admin.repository.UserRepository;
@@ -24,7 +25,6 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import com.lideng.sword.admin.dao.SysConfigMapper;
-import com.lideng.sword.admin.model.entity.SysConfig;
 import com.lideng.sword.admin.service.SysConfigService;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -41,11 +41,6 @@ import static com.lideng.sword.admin.constant.SysConstants.USERNAME;
  */
 public class SysConfigServiceImpl  implements SysConfigService {
 
-	@Autowired
-	SysConfigMapper sysConfigMapper;
-
-	@Autowired
-	IdWorker idWorker;
 
 	@Autowired
 	UserRepository userRepository;
@@ -55,47 +50,38 @@ public class SysConfigServiceImpl  implements SysConfigService {
 
 	@Autowired
 	MenuRepository menuRepository;
-
-
+	@Autowired
+	ConfigRepository configRepository;
 
 	@Override
-	public int create(SysConfigSaveDTO sysConfigSaveDTO, HttpServletRequest request) {
-
+	public String create(SysConfigSaveDTO sysConfigSaveDTO) {
 
 		SysConfig sysConfig =new SysConfig();
 		BeanUtils.copyProperties(sysConfigSaveDTO,sysConfig);
-		log.info(sysConfig.toString());
-		sysConfig.setId(idWorker.nextId() + "");
-		sysConfig.setCreateTime(new Date());
-		sysConfig.setCreateBy((String) request.getSession().getAttribute(USERNAME.getValue()));
-		sysConfig.setDelFlag(true);
+		sysConfig.setDelFlag(DelStatus.NORMAL);
 		sysConfig.setVersion(0);
-		log.info(sysConfig.toString());
-		return sysConfigMapper.insert(sysConfig);
+		return configRepository.save(sysConfig).getId();
 	}
 
 	@Override
-	public int update(SysConfigUpdateDTO record,HttpServletRequest request) {
+	public String update(SysConfigUpdateDTO record) {
 
-		SysConfig sysConfig = sysConfigMapper.selectByPrimaryKey(record.getId());
+		SysConfig sysConfig = configRepository.getOne(record.getId());
 		BeanUtils.copyProperties(record,sysConfig);
-		sysConfig.setLastUpdateBy((String) request.getSession().getAttribute(USERNAME.getValue()));
-		sysConfig.setLastUpdateTime(new Date());
 		sysConfig.setVersion(sysConfig.getVersion()+1);
-		log.info(sysConfig.toString());
-		return sysConfigMapper.updateByPrimaryKey(sysConfig);
+		return configRepository.save(sysConfig).getId();
 	}
 
 
 	@Override
 	public int delete(List<String> ids) {
-		ids.forEach(id->sysConfigMapper.updateDeleteFlagByid(id));
+		ids.forEach(id->configRepository.deleteById(id));
 		return ids.size();
 	}
 
 	@Override
 	public SysConfig findById(String id) {
-		return sysConfigMapper.selectByPrimaryKey(id);
+		return configRepository.getOne(id);
 	}
 
 	@Override
@@ -134,7 +120,7 @@ public class SysConfigServiceImpl  implements SysConfigService {
 
 	@Override
 	public List<SysConfig> findByLabel(String label) {
-		return sysConfigMapper.findByLable(label);
+		return configRepository.findByLabel(label);
 	}
 
 

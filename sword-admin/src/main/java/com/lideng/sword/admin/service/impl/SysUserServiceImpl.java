@@ -17,7 +17,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import com.lideng.sword.admin.dao.SysUserMapper;
 import com.lideng.sword.admin.dao.SysUserRoleMapper;
-import com.lideng.sword.admin.model.entity.SysMenu;
+import com.lideng.sword.admin.entity.SysMenu;
 import com.lideng.sword.admin.model.entity.SysUser;
 import com.lideng.sword.admin.model.entity.SysUserRole;
 import com.lideng.sword.admin.service.SysMenuService;

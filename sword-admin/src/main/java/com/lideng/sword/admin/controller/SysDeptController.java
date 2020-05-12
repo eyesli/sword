@@ -26,14 +26,14 @@ public class SysDeptController {
 	
 	@PreAuthorize("hasAuthority('sys:dept:add') AND hasAuthority('sys:dept:edit')")
 	@RequestMapping(value="/create",method = RequestMethod.POST)
-	public HttpResult create(@RequestBody SysDeptCreateDTO record, HttpServletRequest request) {
-		return HttpResult.ok(sysDeptService.create(record,request));
+	public HttpResult create(@RequestBody SysDeptCreateDTO record) {
+		return HttpResult.ok(sysDeptService.create(record));
 	}
 
 	@PreAuthorize("hasAuthority('sys:config:add') AND hasAuthority('sys:config:edit')")
 	@RequestMapping(value="/update",method = RequestMethod.POST)
-	public HttpResult update(@RequestBody SysDeptUpdateDTO record, HttpServletRequest request) {
-		return HttpResult.ok(sysDeptService.update(record,request));
+	public HttpResult update(@RequestBody SysDeptUpdateDTO record) {
+		return HttpResult.ok(sysDeptService.update(record));
 	}
 
 	@PreAuthorize("hasAuthority('sys:dept:delete')")

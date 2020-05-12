@@ -28,14 +28,14 @@ public class SysMenuController {
 	
 	@PreAuthorize("hasAuthority('sys:menu:add') AND hasAuthority('sys:menu:edit')")
 	@RequestMapping(value="/create",method = RequestMethod.POST)
-	public HttpResult create(@RequestBody SysMenuCreateDTO record, HttpServletRequest request) {
-		return HttpResult.ok(sysMenuService.create(record,request));
+	public HttpResult create(@RequestBody SysMenuCreateDTO record) {
+		return HttpResult.ok(sysMenuService.create(record));
 	}
 
 	@PreAuthorize("hasAuthority('sys:config:add') AND hasAuthority('sys:config:edit')")
 	@RequestMapping(value="/update",method = RequestMethod.POST)
-	public HttpResult update(@RequestBody SysMenuUpdateDTO record, HttpServletRequest request) {
-		return HttpResult.ok(sysMenuService.update(record,request));
+	public HttpResult update(@RequestBody SysMenuUpdateDTO record) {
+		return HttpResult.ok(sysMenuService.update(record));
 	}
 
 	@PreAuthorize("hasAuthority('sys:menu:delete')")

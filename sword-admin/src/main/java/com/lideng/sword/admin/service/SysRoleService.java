@@ -3,8 +3,8 @@ package com.lideng.sword.admin.service;
 import java.util.List;
 import java.util.Map;
 
-import com.lideng.sword.admin.model.entity.SysMenu;
-import com.lideng.sword.admin.model.entity.SysRole;
+import com.lideng.sword.admin.entity.SysMenu;
+import com.lideng.sword.admin.entity.SysRole;
 import com.lideng.sword.admin.model.request.SysRoleCreateDTO;
 import com.lideng.sword.admin.model.request.SysRoleMenuCreateDTO;
 import com.lideng.sword.admin.model.request.SysRoleUpdateDTO;
@@ -35,14 +35,14 @@ public interface SysRoleService {
 	 * @param records
 	 * @return
 	 */
-	int saveRoleMenus(List<SysRoleMenuCreateDTO> records,HttpServletRequest request);
+	int saveRoleMenus(List<SysRoleMenuCreateDTO> records);
 
-	int create(SysRoleCreateDTO record, HttpServletRequest request);
+	String create(SysRoleCreateDTO record);
 
-	int update(SysRoleUpdateDTO record, HttpServletRequest request);
+	String update(SysRoleUpdateDTO record);
 
 	int delete(List<String> ids);
 
-	List<Map> findA();
+
 
 }

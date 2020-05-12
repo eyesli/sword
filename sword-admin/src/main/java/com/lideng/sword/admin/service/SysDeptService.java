@@ -2,7 +2,8 @@ package com.lideng.sword.admin.service;
 
 import java.util.List;
 
-import com.lideng.sword.admin.model.entity.SysDept;
+
+import com.lideng.sword.admin.entity.SysDept;
 import com.lideng.sword.admin.model.request.SysDeptCreateDTO;
 import com.lideng.sword.admin.model.request.SysDeptUpdateDTO;
 import javax.servlet.http.HttpServletRequest;
@@ -27,15 +28,15 @@ public interface SysDeptService  {
 	 * @param record
 	 * @return
 	 */
-	int create(SysDeptCreateDTO record, HttpServletRequest request);
+	String create(SysDeptCreateDTO record);
 
 	/**
 	 * 保存操作
 	 * @param record
-	 * @param request
+	 * @param
 	 * @return
 	 */
-	int update(SysDeptUpdateDTO record, HttpServletRequest request);
+	String update(SysDeptUpdateDTO record);
 
 
 

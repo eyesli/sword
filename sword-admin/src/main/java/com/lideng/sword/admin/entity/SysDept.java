@@ -1,7 +1,6 @@
 package com.lideng.sword.admin.entity;
 
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import javax.persistence.Transient;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
@@ -10,6 +9,7 @@ import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
 import javax.persistence.Table;
 import java.util.List;
+
 
 /**
  * 基础模型
@@ -29,4 +29,12 @@ public class SysDept extends BaseModel {
 
     private Integer orderNum;
 
+    @Transient
+    private Integer level;
+
+    @Transient
+    private List<SysDept> children;
+
+    @Transient
+    private String parentName;
 }
