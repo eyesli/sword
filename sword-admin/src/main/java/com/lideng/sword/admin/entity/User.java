@@ -1,10 +1,11 @@
-package com.lideng.sword.admin.jpa;
+package com.lideng.sword.admin.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.envers.Audited;
+import org.hibernate.envers.RelationTargetAuditMode;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedBy;
@@ -20,6 +21,11 @@ import java.util.Set;
 @Setter
 @Table(name = "users")
 @EntityListeners(AuditingEntityListener.class)
+//@NamedEntityGraph(name = "MerchantOtherEntity", attributeNodes = {@NamedAttributeNode("merchantStatusEntity")})
+
+//@EntityGraph(value = "MerchantOtherEntity", type = EntityGraph.EntityGraphType.FETCH)
+
+@Audited
 public class User{
     @Id
     @GenericGenerator(name = "idWorker", strategy = "com.lideng.sword.common.utils.IdGenerator" )
@@ -65,16 +71,33 @@ public class User{
             inverseJoinColumns = 
             @JoinColumn(name = "TeacherId",referencedColumnName = "id")
     )
+    @Audited(targetAuditMode = RelationTargetAuditMode.NOT_AUDITED)
     private Set<Teacher> teachers;
 
 
+//    @ManyToOne(fetch = FetchType.LAZY)
+//    @JoinColumn(name = "MT_BUSINESS_TYPE_ID", nullable = true, insertable = false, updatable = false)
+//    @Audited(targetAuditMode = RelationTargetAuditMode.NOT_AUDITED)
+//    private BusinessTypeEntity businessTypeEntity;
+
+
 //    @PrePersist
-//    protected void onCreate() {
-//        createDate = new Date();
+//    public void onPrePersist() {
+//        audit("INSERT");
 //    }
 //
 //    @PreUpdate
-//    protected void onUpdate() {
-//        updateDate = new Date();
+//    public void onPreUpdate() {
+//        audit("UPDATE");
+//    }
+//
+//    @PreRemove
+//    public void onPreRemove() {
+//        audit("DELETE");
+//    }
+//
+//    private void audit(String operation) {
+//        setOperation(operation);
+//        setTimestamp((new Date()).getTime());
 //    }
 }

@@ -2,7 +2,7 @@ package com.lideng.sword.admin.service;
 
 import java.util.List;
 
-import com.lideng.sword.admin.jpa.User;
+import com.lideng.sword.admin.entity.User;
 import com.lideng.sword.admin.model.entity.SysConfig;
 import com.lideng.sword.admin.model.request.SysConfigSaveDTO;
 import com.lideng.sword.admin.model.request.SysConfigUpdateDTO;

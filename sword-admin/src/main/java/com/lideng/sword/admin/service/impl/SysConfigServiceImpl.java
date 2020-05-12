@@ -3,14 +3,13 @@ package com.lideng.sword.admin.service.impl;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
+import java.util.NoSuchElementException;
 
-import com.lideng.sword.admin.jpa.Teacher;
-import com.lideng.sword.admin.jpa.User;
-import com.lideng.sword.admin.jpa.UserDTO;
+import com.lideng.sword.admin.entity.*;
 import com.lideng.sword.admin.model.request.SysConfigSaveDTO;
 import com.lideng.sword.admin.model.request.SysConfigUpdateDTO;
+import com.lideng.sword.admin.repository.MenuRepository;
+import com.lideng.sword.admin.repository.RoleRepository;
 import com.lideng.sword.admin.repository.UserRepository;
 import com.lideng.sword.admin.util.SecurityUtils;
 import com.lideng.sword.common.utils.IdWorker;
@@ -20,11 +19,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.persistence.criteria.*;
 
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.jpa.domain.Specification;
-import org.springframework.security.core.context.SecurityContext;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import com.lideng.sword.admin.dao.SysConfigMapper;
@@ -54,11 +50,18 @@ public class SysConfigServiceImpl  implements SysConfigService {
 	@Autowired
 	UserRepository userRepository;
 
+	@Autowired
+	RoleRepository roleRepository;
+
+	@Autowired
+	MenuRepository menuRepository;
+
+
+
 	@Override
 	public int create(SysConfigSaveDTO sysConfigSaveDTO, HttpServletRequest request) {
 
-		//todo 可以从这里获取登陆的用户名  HttpServletRequest 可以删掉了
-		String username = SecurityUtils.getUsername();
+
 		SysConfig sysConfig =new SysConfig();
 		BeanUtils.copyProperties(sysConfigSaveDTO,sysConfig);
 		log.info(sysConfig.toString());
@@ -99,17 +102,34 @@ public class SysConfigServiceImpl  implements SysConfigService {
 	public List<User> test(String label) {
 
 		//List<User> all = UserRepository.
-		//UserDTO userById = userRepository.findUserById(1L);
+		SysUser sysUser1 = userRepository.findById("1260081237888995328").orElseThrow(NoSuchElementException::new);
+
+
+		SysUser sysUser = new SysUser();
+		sysUser.setName("sysUser4");
+		sysUser.setVersion(0);
+		List<String> list= new ArrayList<String>();
+		list.add("3");
+		list.add("4");
+
+		List<SysMenu> allById = menuRepository.findAllById(list);
+
+
+		SysRole sysRole = new SysRole();
+
+		sysRole.setName("天堂经理");
+		sysRole.setSysMenu(allById);
+		SysRole save = roleRepository.save(sysRole);
 		PageRequest pageRequest = PageRequest.of(0, 1);
 		//Page<List<UserDTO>> userById = userRepository.findUserById("1", UserDTO.class, pageRequest);
 
 
 
-		List<User> all = userRepository.findAll(createSpecification("stud1", "Tea wang"));
-		System.out.println(all);
-		List all1 = userRepository.findAll();
+//		List<User> all = userRepository.findAll(createSpecification("stud1", "Tea wang"));
+//		System.out.println(all);
+//		List all1 = userRepository.findAll();
 
-		return all1;
+		return null;
 	}
 
 	@Override

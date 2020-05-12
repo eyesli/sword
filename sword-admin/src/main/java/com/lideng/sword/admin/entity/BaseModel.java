@@ -1,7 +1,5 @@
-package com.lideng.sword.common.entity;
+package com.lideng.sword.admin.entity;
 
-import lombok.Data;
-import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;
@@ -18,21 +16,15 @@ import java.util.Date;
  * @author lideng
  * @date Sep 13, 2018
  */
-@Entity
+@MappedSuperclass
 @Getter
 @Setter
-@Table(name = "sys_role")
-public class SysRole extends BaseModel {
-
+public class BaseModel {
     @Id
     @GenericGenerator(name = "idWorker", strategy = "com.lideng.sword.common.utils.IdGenerator" )
     @GeneratedValue(generator = "idWorker")
     @Column(name = "ID")
-    private String id;
-
-    private String name;
-
-    private String remark;
+	private String id;
 
     @Column(name = "create_by")
     @CreatedBy
@@ -52,19 +44,9 @@ public class SysRole extends BaseModel {
     @Column(name = "last_update_time")
     private Date lastUpdateTime;
 
+    @Enumerated(EnumType.ORDINAL)
     @Column(name = "del_flag")
-    private boolean delFlag;
+    private DelStatus delFlag;
 
     private Integer version;
-
-    @PrePersist
-    protected void onCreate() {
-        createTime = new Date();
-    }
-
-    @PreUpdate
-    protected void onUpdate() {
-        lastUpdateTime = new Date();
-    }
-
 }

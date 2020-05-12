@@ -7,7 +7,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 
 @SpringBootApplication(scanBasePackages={"com.lideng.sword.admin"})
-
+//@SpringBootApplication(scanBasePackages= {"com.lideng.sword.admin", "com.lideng.sword.admin"})
 /**
  * 项目启动入口
  * @author lideng
