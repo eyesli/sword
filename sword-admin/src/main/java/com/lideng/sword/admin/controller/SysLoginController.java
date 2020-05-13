@@ -97,9 +97,5 @@ public class SysLoginController {
 		JwtAuthenticatioToken token = SecurityUtils.login(request, username, password, authenticationManager);
 		return HttpResult.ok(token);
 	}
-	@GetMapping(value = "/info")
-	public HttpResult info()   {
-		return HttpResult.ok("ok");
-	}
 
 }

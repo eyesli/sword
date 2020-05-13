@@ -21,6 +21,4 @@ public class SysDictCreateDTO {
 
     private String remarks;
 
-    private Boolean delFlag;
-
 }

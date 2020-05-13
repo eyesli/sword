@@ -26,6 +26,4 @@ public class SysMenuCreateDTO  {
 
     private Integer orderNum;
 
-    private Boolean delFlag;
-
 }

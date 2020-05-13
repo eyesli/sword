@@ -16,6 +16,4 @@ public class SysRoleCreateDTO{
 
     private String remark;
 
-    private Boolean delFlag;
-
 }

@@ -70,8 +70,7 @@ public class SysRoleServiceImpl  implements SysRoleService {
 
 	@Override
 	public List<SysRole> findAll() {
-		List<SysRole> all = roleRepository.findAll();
-		return all;
+		return roleRepository.findAll();
 	}
 
 

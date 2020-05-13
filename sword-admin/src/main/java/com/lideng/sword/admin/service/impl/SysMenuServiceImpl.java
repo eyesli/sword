@@ -1,6 +1,7 @@
 package com.lideng.sword.admin.service.impl;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 import com.lideng.sword.admin.model.entity.MenuType;
@@ -104,7 +105,7 @@ public class SysMenuServiceImpl implements SysMenuService {
 				}
 			}
 			SysMenu.setChildren(children);
-			children.sort((o1, o2) -> o1.getOrderNum().compareTo(o2.getOrderNum()));
+			children.sort(Comparator.comparing(com.lideng.sword.admin.model.entity.SysMenu::getOrderNum));
 			findChildren(children, menus, menuType);
 		}
 	}
