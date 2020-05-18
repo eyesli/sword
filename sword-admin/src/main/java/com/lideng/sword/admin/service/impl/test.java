@@ -5,10 +5,7 @@ import com.lideng.sword.admin.dao.SysRoleMapper;
 import com.lideng.sword.admin.dao.SysRoleMenuMapper;
 import com.lideng.sword.admin.jpa.Teacher;
 import com.lideng.sword.admin.jpa.User;
-import com.lideng.sword.admin.jpa.UserDTO;
-import com.lideng.sword.admin.model.entity.SysRoleMenu;
-import com.lideng.sword.admin.repository.TeacherRepository;
-import com.lideng.sword.admin.repository.UserRepository;
+
 import com.lideng.sword.common.utils.IdWorker;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -30,10 +27,10 @@ public class test {
     @Autowired
     private SysRoleMenuMapper sysRoleMenuMapper;
 
-    @Autowired
-    com.lideng.sword.admin.repository.UserRepository userRepository;
-    @Autowired
-    TeacherRepository teacherRepository;
+//    @Autowired
+//    com.lideng.sword.admin.repository.UserRepository userRepository;
+//    @Autowired
+//    TeacherRepository teacherRepository;
 
     @Autowired
     IdWorker idWorker;
@@ -82,7 +79,7 @@ public class test {
         list.add(user1);
         list.add(user2);
         list.add(user3);
-        userRepository.saveAll(list);
+       // userRepository.saveAll(list);
 
        // teacherRepository.save(teacher);
 //

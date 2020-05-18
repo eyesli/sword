@@ -11,7 +11,7 @@ import com.lideng.sword.admin.jpa.User;
 import com.lideng.sword.admin.jpa.UserDTO;
 import com.lideng.sword.admin.model.request.SysConfigSaveDTO;
 import com.lideng.sword.admin.model.request.SysConfigUpdateDTO;
-import com.lideng.sword.admin.repository.UserRepository;
+
 import com.lideng.sword.admin.util.SecurityUtils;
 import com.lideng.sword.common.utils.IdWorker;
 import lombok.extern.slf4j.Slf4j;
@@ -51,8 +51,8 @@ public class SysConfigServiceImpl  implements SysConfigService {
 	@Autowired
 	IdWorker idWorker;
 
-	@Autowired
-	UserRepository userRepository;
+//	@Autowired
+//	UserRepository userRepository;
 
 	@Override
 	public int create(SysConfigSaveDTO sysConfigSaveDTO, HttpServletRequest request) {
@@ -105,11 +105,11 @@ public class SysConfigServiceImpl  implements SysConfigService {
 
 
 
-		List<User> all = userRepository.findAll(createSpecification("stud1", "Tea wang"));
-		System.out.println(all);
-		List all1 = userRepository.findAll();
+//		List<User> all = userRepository.findAll(createSpecification("stud1", "Tea wang"));
+//		System.out.println(all);
+//		List all1 = userRepository.findAll();
 
-		return all1;
+		return null;
 	}
 
 	@Override
