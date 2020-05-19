@@ -34,7 +34,7 @@ public class SysRole  extends BaseModel {
     @JsonIgnore
     @OneToMany(fetch = FetchType.LAZY)
     @JoinTable(
-            name = "ADMIN_ROLE_MENU_RELATIONS",
+            name = "SYS_ROLE_MENU_RELATIONS",
             joinColumns =
             @JoinColumn(name = "role_id",referencedColumnName = "id"),
             inverseJoinColumns =
