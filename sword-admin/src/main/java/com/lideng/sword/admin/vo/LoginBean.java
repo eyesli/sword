@@ -10,6 +10,7 @@ import lombok.Data;
  */
 @Builder
 @Data
+
 public class LoginBean {
 
 	private String username;

@@ -1,7 +1,6 @@
 package com.lideng.sword.admin.mq;
 
-import lombok.extern.log4j.Log4j;
-import org.apache.log4j.Logger;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.core.AmqpTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -11,7 +10,7 @@ import java.util.Date;
 /**
  * @author lideng
  */
-@Log4j
+@Slf4j
 @Component
 public class Sender {
 

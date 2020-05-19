@@ -1,5 +1,6 @@
 server:
   port: 8001
+
 spring:
   datasource:
     name: druidDataSource
@@ -23,6 +24,12 @@ spring:
       pool-prepared-statements: true
       max-open-prepared-statements: 50
       max-pool-prepared-statement-per-connection-size: 20
+
+#     去掉  Spring Data Redis - Could not safely identify store assignment for repositor
+  data:
+    redis:
+      repositories:
+        enabled: false
   redis:
     host: 127.0.0.1
     port: 6379

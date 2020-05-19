@@ -21,7 +21,7 @@ public class QuartzConfig {
     }
     @Bean
     public Trigger printTimeJobTrigger() {
-        CronScheduleBuilder cronScheduleBuilder = CronScheduleBuilder.cronSchedule("0/10 * * * * ?");
+        CronScheduleBuilder cronScheduleBuilder = CronScheduleBuilder.cronSchedule("0/50 * * * * ?");
         return TriggerBuilder.newTrigger()
                 .forJob(printTimeJobDetail())//关联上述的JobDetail
                 .withIdentity("quartzTaskService")//给Trigger起个名字

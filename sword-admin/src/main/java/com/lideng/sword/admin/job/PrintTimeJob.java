@@ -1,9 +1,7 @@
 package com.lideng.sword.admin.job;
 
 import org.quartz.JobExecutionContext;
-import org.quartz.JobExecutionException;
 import org.springframework.scheduling.quartz.QuartzJobBean;
-
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
