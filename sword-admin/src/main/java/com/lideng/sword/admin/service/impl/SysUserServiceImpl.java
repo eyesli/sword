@@ -59,7 +59,7 @@ public class SysUserServiceImpl  implements SysUserService {
 	}
 
 	@Override
-	public String update(SysUserUpdateDTO record) {
+	public SysUser update(SysUserUpdateDTO record) {
 
 		SysUser sysUser = userRepository.getOne(record.getId());
 
@@ -73,7 +73,7 @@ public class SysUserServiceImpl  implements SysUserService {
 		BeanUtils.copyProperties(record,sysUser);
 		sysUser.setVersion(sysUser.getVersion()+1);
 
-		return userRepository.save(sysUser).getId();
+		return userRepository.save(sysUser);
 	}
 
 	@Override
@@ -89,6 +89,21 @@ public class SysUserServiceImpl  implements SysUserService {
 		//软删除 更新del_flag字段
 		ids.forEach(id->userRepository.deleteById(id));
 		return ids.size();
+	}
+
+	@Override
+	public List<SysUser> findUserList() {
+
+
+
+		return userRepository.findAll();
+	}
+
+	@Override
+	public void deleteById(String id) {
+		SysUser sysUser = userRepository.findById(id).orElseThrow(NoSuchElementException::new);
+		sysUser.setDelFlag(DelStatus.DELETE);
+		userRepository.save(sysUser);
 	}
 
 	@Override

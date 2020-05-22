@@ -35,12 +35,12 @@ public interface SysRoleService {
 	 */
 	int saveRoleMenus(List<SysRoleMenuCreateDTO> records);
 
-	String create(SysRoleCreateDTO record);
+	SysRole create(SysRoleCreateDTO record);
 
-	String update(SysRoleUpdateDTO record);
+	SysRole update(SysRoleUpdateDTO record);
 
 	int delete(List<String> ids);
 
-
+	void deleteById(String id);
 
 }

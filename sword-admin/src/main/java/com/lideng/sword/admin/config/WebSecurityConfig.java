@@ -23,7 +23,7 @@ import org.springframework.security.web.authentication.logout.HttpStatusReturnin
  */
 @Configuration
 @EnableWebSecurity	// 开启Spring Security
-@EnableGlobalMethodSecurity(prePostEnabled = true)	// 开启权限注解，如：@PreAuthorize注解
+@EnableGlobalMethodSecurity(prePostEnabled = true)	// 开启权限注解，如：//@PreAuthorize注解
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
@@ -49,6 +49,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
             // 首页和登录页面
             .antMatchers("/").permitAll()
             .antMatchers("/user/login").permitAll()
+                .antMatchers("/**/**").permitAll()
             // swagger
             .antMatchers("/swagger-ui.html").permitAll()
             .antMatchers("/swagger-resources/**").permitAll()
@@ -56,6 +57,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
             .antMatchers("/webjars/springfox-swagger-ui/**").permitAll()
             // 验证码
             .antMatchers("/user/captcha.jpg**").permitAll()
+
             // 服务监控
             .antMatchers("/actuator/**").permitAll()
             // 其他所有请求需要身份认证

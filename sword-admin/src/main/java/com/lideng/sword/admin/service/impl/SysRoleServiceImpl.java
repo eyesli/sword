@@ -9,6 +9,7 @@ import com.lideng.sword.admin.repository.MenuRepository;
 import com.lideng.sword.admin.repository.RoleRepository;
 import com.lideng.sword.core.exception.SwordException;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -38,20 +39,25 @@ public class SysRoleServiceImpl  implements SysRoleService {
 
 
 	@Override
-	public String create(SysRoleCreateDTO record) {
+	public SysRole create(SysRoleCreateDTO record) {
 
 		SysRole sysRole =new SysRole();
 		if(roleRepository.findByName(record.getName()).isPresent()) {
 			throw new SwordException("角色名已存在!");
 		}
-		BeanUtils.copyProperties(record,sysRole);
+		sysRole.setName(record.getName());
+		sysRole.setDescription(record.getDesc());
 		sysRole.setVersion(0);
+		if (StringUtils.isBlank(record.getDepartmentId()))
+		{
+			sysRole.setDeptId(null);
+		}
 
-		return roleRepository.save(sysRole).getId();
+		return roleRepository.save(sysRole);
 	}
 
 	@Override
-	public String update(SysRoleUpdateDTO record) {
+	public SysRole update(SysRoleUpdateDTO record) {
 
 		SysRole sysRole = roleRepository.getOne(record.getId());
 		if(ADMIN.getValue().equals(sysRole.getName())) {
@@ -59,13 +65,18 @@ public class SysRoleServiceImpl  implements SysRoleService {
 		}
 		BeanUtils.copyProperties(record,sysRole);
 		sysRole.setVersion(sysRole.getVersion()+1);
-		return roleRepository.save(sysRole).getId();
+		return roleRepository.save(sysRole);
 	}
 
 	@Override
 	public int delete(List<String> ids) {
 		ids.forEach(id->roleRepository.deleteById(id));
 		return ids.size();
+	}
+
+	@Override
+	public void deleteById(String id) {
+		roleRepository.deleteById(id);
 	}
 
 	@Override
@@ -80,7 +91,7 @@ public class SysRoleServiceImpl  implements SysRoleService {
 			// 如果是超级管理员，返回全部
 			return menuRepository.findAll();
 		}
-		return roleRepository.getOne(roleId).getSysMenu();
+		return null;
 	}
 
 
@@ -94,7 +105,7 @@ public class SysRoleServiceImpl  implements SysRoleService {
 			throw new SwordException("超级管理员拥有所有菜单权限，不允许修改！");
 		}
 
-		sysRole.setSysMenu(menuRepository.findAllById(menuIdList));
+		//sysRole.setSysMenu(menuRepository.findAllById(menuIdList));
 		roleRepository.save(sysRole);
 		return menuIdList.size();
 	}

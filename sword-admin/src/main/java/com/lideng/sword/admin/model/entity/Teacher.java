@@ -17,7 +17,6 @@ import static org.hibernate.envers.RelationTargetAuditMode.NOT_AUDITED;
 @Setter
 @Table(name = "TEACHERS")
 @EqualsAndHashCode
-@Audited
 public class Teacher {
 
     @Id
@@ -30,6 +29,5 @@ public class Teacher {
     private String name;
 
     @ManyToMany(mappedBy = "teachers")
-    @Audited(targetAuditMode = NOT_AUDITED)
     private List<User> users;
 }

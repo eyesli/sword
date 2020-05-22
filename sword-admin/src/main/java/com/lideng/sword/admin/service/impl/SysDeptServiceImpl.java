@@ -2,6 +2,7 @@ package com.lideng.sword.admin.service.impl;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 import com.lideng.sword.admin.model.entity.SysDept;
 import com.lideng.sword.admin.model.request.SysDeptCreateDTO;
@@ -35,6 +36,7 @@ public class SysDeptServiceImpl implements SysDeptService {
 		SysDept sysDept =new SysDept();
 		BeanUtils.copyProperties(record,sysDept);
 		sysDept.setVersion(0);
+		sysDept.setParentId(record.getParentId());
 		return sysDeptRepository.save(sysDept).getId();
 	}
 
@@ -49,16 +51,16 @@ public class SysDeptServiceImpl implements SysDeptService {
 
 
 	@Override
-	public int delete(List<String> ids) {
+	public void delete(String id) {
 
 		//todo 删除部门之前是不是应该先判断有没有user
-		ids.forEach(id->sysDeptRepository.deleteById(id));
-		return ids.size();
+		sysDeptRepository.deleteById(id);
+		//return ids.size();
 	}
 
 	@Override
 	public SysDept findById(String id) {
-		return sysDeptRepository.getOne(id);
+		return sysDeptRepository.findById(id).orElseThrow(NoSuchElementException::new);
 	}
 
 	@Override

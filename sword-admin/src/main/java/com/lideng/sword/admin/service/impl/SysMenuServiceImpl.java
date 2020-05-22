@@ -85,6 +85,7 @@ public class SysMenuServiceImpl implements SysMenuService {
 		if(StringUtils.isBlank(userName) || SysConstants.ADMIN.getValue().equalsIgnoreCase(userName)) {
 			return menuRepository.findAll();
 		}
+		//todo 这里要连表查询 由于用的都是admin 所以暂时没问题。这里是要查权限注解的
 		return menuRepository.findByName(userName);
 	}
 

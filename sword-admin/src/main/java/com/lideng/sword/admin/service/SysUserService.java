@@ -33,9 +33,13 @@ public interface SysUserService  {
 //
 	String create(SysUserCreateDTO record);
 
-	String update(SysUserUpdateDTO record);
+	SysUser update(SysUserUpdateDTO record);
 
 	int delete(List<String> ids);
 
+
+	List <SysUser >findUserList();
+
+	void deleteById(String id);
 
 }

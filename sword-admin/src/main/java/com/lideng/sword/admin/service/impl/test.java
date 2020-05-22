@@ -33,7 +33,7 @@ public class test {
         SysRole sysRoles = new SysRole();
         sysRoles.setName("经理2");
         sysRoles.setDelFlag(DelStatus.NORMAL);
-        sysRoles.setDescription("2一般般权限");
+       // sysRoles.setDescription("2一般般权限");
         sysRoles.setVersion(0);
 //        roleRepository.save(sysRoles);
 

@@ -40,7 +40,7 @@ public interface SysDeptService  {
 
 
 
-	int delete(List<String> ids);
+	void delete(String ids);
 
 	/**
 	 * 根据ID查询

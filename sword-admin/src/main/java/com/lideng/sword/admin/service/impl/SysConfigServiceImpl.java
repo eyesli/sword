@@ -92,7 +92,8 @@ public class SysConfigServiceImpl  implements SysConfigService {
 
 		sender.send();
 		SysUser sysUser = new SysUser();
-		sysUser.setName("123");
+		sysUser.setName("54321");
+		sysUser.setVersion(0);
 		UserEvent userevent = new UserEvent(this,sysUser);
 		applicationContext.publishEvent(userevent);
 

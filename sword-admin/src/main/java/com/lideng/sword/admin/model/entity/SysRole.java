@@ -28,8 +28,11 @@ public class SysRole  extends BaseModel {
 
     private String name;
 
+    @Column(name="description")
     private String description;
 
+    @Column(name="dept_id")
+    private String deptId;
 
     @JsonIgnore
     @OneToMany(fetch = FetchType.LAZY)
@@ -40,12 +43,10 @@ public class SysRole  extends BaseModel {
             inverseJoinColumns =
             @JoinColumn(name = "menu_id",referencedColumnName = "id")
     )
-    @Audited(targetAuditMode = RelationTargetAuditMode.NOT_AUDITED)
     private List<SysMenu> sysMenu;
 
     @JsonIgnore
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "dept_id")
-    @Audited(targetAuditMode = RelationTargetAuditMode.NOT_AUDITED)
+    @ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.DETACH)
+    @JoinColumn(name = "dept_id",insertable = false, updatable = false)
     private SysDept sysDept;
 }

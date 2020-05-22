@@ -25,7 +25,6 @@ import java.util.Set;
 
 //@EntityGraph(value = "MerchantOtherEntity", type = EntityGraph.EntityGraphType.FETCH)
 
-@Audited
 public class User{
     @Id
     @GenericGenerator(name = "idWorker", strategy = "com.lideng.sword.common.utils.IdGenerator" )
@@ -71,7 +70,6 @@ public class User{
             inverseJoinColumns = 
             @JoinColumn(name = "TeacherId",referencedColumnName = "id")
     )
-    @Audited(targetAuditMode = RelationTargetAuditMode.NOT_AUDITED)
     private Set<Teacher> teachers;
 
 
