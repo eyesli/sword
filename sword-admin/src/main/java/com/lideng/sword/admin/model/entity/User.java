@@ -61,7 +61,7 @@ public class User{
      */
    // @JsonIgnore
 
-    @JsonIgnoreProperties(value = { "users" })
+   // @JsonIgnoreProperties(value = { "users" })
     @ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     @JoinTable(
             name = "TEACHER_USER_RELATIONS",

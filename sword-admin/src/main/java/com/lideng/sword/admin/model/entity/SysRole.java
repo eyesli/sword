@@ -1,6 +1,7 @@
 package com.lideng.sword.admin.model.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.lideng.sword.admin.model.entity.BaseModel;
 import com.lideng.sword.admin.model.entity.SysDept;
 import com.lideng.sword.admin.model.entity.SysMenu;
@@ -34,7 +35,7 @@ public class SysRole  extends BaseModel {
     @Column(name="dept_id")
     private String deptId;
 
-    @JsonIgnore
+
     @OneToMany(fetch = FetchType.LAZY)
     @JoinTable(
             name = "SYS_ROLE_MENU_RELATIONS",
@@ -45,7 +46,7 @@ public class SysRole  extends BaseModel {
     )
     private List<SysMenu> sysMenu;
 
-    @JsonIgnore
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     @ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.DETACH)
     @JoinColumn(name = "dept_id",insertable = false, updatable = false)
     private SysDept sysDept;

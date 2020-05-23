@@ -30,6 +30,19 @@ public class SysDept extends BaseModel {
 
     private Integer orderNum;
 
+
+
+    @Transient
+    private String title;
+
+    @Transient
+    private String key;
+
+    @Transient
+    private String value;
+
+
+
     @Transient
     private Integer level;
 

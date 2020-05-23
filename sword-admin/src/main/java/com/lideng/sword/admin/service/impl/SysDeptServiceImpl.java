@@ -70,6 +70,9 @@ public class SysDeptServiceImpl implements SysDeptService {
 		for (SysDept dept : depts) {
 			if (StringUtils.isBlank(dept.getParentId())) {
 				dept.setLevel(0);
+				dept.setKey(dept.getId());
+				dept.setValue(dept.getId());
+				dept.setTitle(dept.getName());
 				sysDepts.add(dept);
 			}
 		}
@@ -81,9 +84,12 @@ public class SysDeptServiceImpl implements SysDeptService {
 		for (SysDept sysDept : sysDepts) {
 			List<SysDept> children = new ArrayList<>();
 			for (SysDept dept : depts) {
-				if (sysDept.getId() != null && sysDept.getId().equals(dept.getParentId())) {
-					dept.setParentName(dept.getName());
+				if (sysDept.getId().equals(dept.getParentId())) {
+					dept.setParentName(sysDept.getName());
 					dept.setLevel(sysDept.getLevel() + 1);
+					dept.setKey(dept.getId());
+					dept.setValue(dept.getId());
+					dept.setTitle(dept.getName());
 					children.add(dept);
 				}
 			}

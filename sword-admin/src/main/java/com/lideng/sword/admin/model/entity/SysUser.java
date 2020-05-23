@@ -1,6 +1,7 @@
 package com.lideng.sword.admin.model.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.envers.Audited;
@@ -41,13 +42,17 @@ public class SysUser extends BaseModel {
     @Enumerated(EnumType.ORDINAL)
     private AccountStatus status;
 
-    @JsonIgnore
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "role_id",insertable = false, updatable = false)
     private SysRole sysRole;
 
-    @JsonIgnore
-    @ManyToOne(fetch = FetchType.LAZY)
+
+    /*
+    这个注解是json序列化的时候会出现问题，懒加载 的时候会出现问题，但是我这里写的是立即加载还是还会有错
+    加这个注解就序列化正常，跟懒加载有关系，没深入看
+     */
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "dept_id",insertable = false, updatable = false)
     private SysDept sysDept;
 }

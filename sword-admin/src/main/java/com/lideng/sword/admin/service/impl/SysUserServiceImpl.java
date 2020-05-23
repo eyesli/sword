@@ -61,15 +61,15 @@ public class SysUserServiceImpl  implements SysUserService {
 	@Override
 	public SysUser update(SysUserUpdateDTO record) {
 
-		SysUser sysUser = userRepository.getOne(record.getId());
+		SysUser sysUser = userRepository.findById(record.getId()).orElseThrow(NoSuchElementException::new);
 
 		if(ADMIN.getValue().equals(sysUser.getName())) {
 			throw new SwordException("超级管理员不允许修改!");
 		}
-		if(!record.getPassword().equals(sysUser.getPassword())) {
-			String password = PasswordUtils.encode(record.getPassword(), sysUser.getSalt());
-			record.setPassword(password);
-		}
+//		if(!record.getPassword().equals(sysUser.getPassword())) {
+//			String password = PasswordUtils.encode(record.getPassword(), sysUser.getSalt());
+//			record.setPassword(password);
+//		}
 		BeanUtils.copyProperties(record,sysUser);
 		sysUser.setVersion(sysUser.getVersion()+1);
 
@@ -93,9 +93,6 @@ public class SysUserServiceImpl  implements SysUserService {
 
 	@Override
 	public List<SysUser> findUserList() {
-
-
-
 		return userRepository.findAll();
 	}
 

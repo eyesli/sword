@@ -52,6 +52,7 @@ public class SysRoleServiceImpl  implements SysRoleService {
 		{
 			sysRole.setDeptId(null);
 		}
+		sysRole.setDeptId(record.getDepartmentId());
 
 		return roleRepository.save(sysRole);
 	}
@@ -70,6 +71,7 @@ public class SysRoleServiceImpl  implements SysRoleService {
 
 	@Override
 	public int delete(List<String> ids) {
+		//todo  一场补货
 		ids.forEach(id->roleRepository.deleteById(id));
 		return ids.size();
 	}
