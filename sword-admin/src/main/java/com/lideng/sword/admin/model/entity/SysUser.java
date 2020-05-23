@@ -39,6 +39,9 @@ public class SysUser extends BaseModel {
     @Column(name = "role_id")
     private String roleId;
 
+    @Column(name = "dept_id")
+    private String deptId;
+
     @Enumerated(EnumType.ORDINAL)
     private AccountStatus status;
 

@@ -63,4 +63,9 @@ public class SysRoleController {
 	public HttpResult saveRoleMenus(@RequestBody List<SysRoleMenuCreateDTO> records) {
 		return HttpResult.ok(sysRoleService.saveRoleMenus(records),"保存成功");
 	}
+
+	@RequestMapping(value="/findRoleByDepartmentId",method = RequestMethod.GET)
+	public HttpResult findRoleByDepartmentId(@RequestParam String id) {
+		return HttpResult.ok(sysRoleService.findRoleByDepartmentId(id),"查询成功");
+	}
 }

@@ -54,6 +54,7 @@ public class SysUserServiceImpl  implements SysUserService {
 		sysUser.setPassword(password);
 		sysUser.setDelFlag(DelStatus.NORMAL);
 		sysUser.setVersion(0);
+		sysUser.setDeptId(record.getDeptId());
 		sysUser.setRoleId(record.getRoleId());
 		return userRepository.save(sysUser).getId();
 	}

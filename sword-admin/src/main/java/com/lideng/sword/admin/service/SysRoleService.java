@@ -43,4 +43,6 @@ public interface SysRoleService {
 
 	void deleteById(String id);
 
+	List<SysRole>  findRoleByDepartmentId(String id);
+
 }

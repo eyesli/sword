@@ -1,6 +1,7 @@
 package com.lideng.sword.admin.service.impl;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 
 import com.lideng.sword.admin.model.request.SysRoleCreateDTO;
 import com.lideng.sword.admin.model.request.SysRoleMenuCreateDTO;
@@ -79,6 +80,11 @@ public class SysRoleServiceImpl  implements SysRoleService {
 	@Override
 	public void deleteById(String id) {
 		roleRepository.deleteById(id);
+	}
+
+	@Override
+	public List<SysRole> findRoleByDepartmentId(String id) {
+		return roleRepository.findByDeptId(id).orElseThrow(NoSuchElementException::new);
 	}
 
 	@Override
