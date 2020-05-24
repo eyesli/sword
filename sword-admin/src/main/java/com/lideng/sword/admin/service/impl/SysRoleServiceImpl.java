@@ -99,21 +99,23 @@ public class SysRoleServiceImpl  implements SysRoleService {
 			// 如果是超级管理员，返回全部
 			return menuRepository.findAll();
 		}
-		return null;
+		return roleRepository.findById(roleId).orElseThrow(NoSuchElementException::new).getSysMenu();
 	}
 
 
 	@Override
-	public int saveRoleMenus(List<SysRoleMenuCreateDTO> records) {
+	public int saveRoleMenus(SysRoleMenuCreateDTO records) {
 
-		String roleId = records.get(0).getRoleId();
-		List<String> menuIdList = records.get(0).getMenuId();
+
+
+		String roleId = records.getRoleId();
+		List<String> menuIdList = records.getMenuId();
 		SysRole sysRole = roleRepository.getOne(roleId);
 		if(ADMIN.getValue().equalsIgnoreCase(sysRole.getName())){
 			throw new SwordException("超级管理员拥有所有菜单权限，不允许修改！");
 		}
 
-		//sysRole.setSysMenu(menuRepository.findAllById(menuIdList));
+		sysRole.setSysMenu(menuRepository.findAllById(menuIdList));
 		roleRepository.save(sysRole);
 		return menuIdList.size();
 	}

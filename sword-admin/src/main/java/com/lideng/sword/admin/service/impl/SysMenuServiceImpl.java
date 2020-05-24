@@ -70,6 +70,9 @@ public class SysMenuServiceImpl implements SysMenuService {
 		for (SysMenu menu : menus) {
 			if ("0".equals(menu.getParentId())) {
 				menu.setLevel(0);
+				menu.setKey(menu.getId());
+				menu.setValue(menu.getId());
+				menu.setTitle(menu.getName());
 				if(!exists(sysMenus, menu)) {
 					sysMenus.add(menu);
 				}
@@ -100,6 +103,9 @@ public class SysMenuServiceImpl implements SysMenuService {
 				if (SysMenu.getId() != null && SysMenu.getId().equals(menu.getParentId())) {
 					menu.setParentName(SysMenu.getName());
 					menu.setLevel(SysMenu.getLevel() + 1);
+					menu.setKey(menu.getId());
+					menu.setValue(menu.getId());
+					menu.setTitle(menu.getName());
 					if(!exists(children, menu)) {
 						children.add(menu);
 					}

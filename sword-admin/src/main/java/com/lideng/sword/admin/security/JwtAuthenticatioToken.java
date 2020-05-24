@@ -2,6 +2,7 @@ package com.lideng.sword.admin.security;
 
 import java.util.Collection;
 
+import com.lideng.sword.admin.model.entity.SysUser;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.GrantedAuthority;
 
@@ -13,6 +14,8 @@ import org.springframework.security.core.GrantedAuthority;
 public class JwtAuthenticatioToken extends UsernamePasswordAuthenticationToken {
 
 	private static final long serialVersionUID = 1L;
+
+	private SysUser sysUser;
 	
 	private String token;
 
@@ -29,7 +32,15 @@ public class JwtAuthenticatioToken extends UsernamePasswordAuthenticationToken {
     	super(principal, credentials, authorities);
     	this.token = token;
     }
-    
+
+	public SysUser getSysUser() {
+		return sysUser;
+	}
+
+	public void setSysUser(SysUser sysUser) {
+		this.sysUser = sysUser;
+	}
+
 	public String getToken() {
 		return token;
 	}

@@ -49,4 +49,13 @@ public class SysMenu extends BaseModel {
     @Transient
     private List<SysMenu> children;
 
+    @Transient
+    private String title;
+
+    @Transient
+    private String key;
+
+    @Transient
+    private String value;
+
 }

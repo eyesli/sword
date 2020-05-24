@@ -28,4 +28,6 @@ public class SysUserUpdateDTO {
 
     private String deptId;
 
+    private String roleId;
+
 }

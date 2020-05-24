@@ -7,6 +7,7 @@ import com.lideng.sword.admin.model.entity.SysDept;
 import com.lideng.sword.admin.model.entity.SysMenu;
 import lombok.Getter;
 import lombok.Setter;
+import org.apache.ibatis.annotations.Many;
 import org.hibernate.envers.Audited;
 import org.hibernate.envers.RelationTargetAuditMode;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
@@ -36,7 +37,7 @@ public class SysRole  extends BaseModel {
     private String deptId;
 
 
-    @OneToMany(fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
             name = "SYS_ROLE_MENU_RELATIONS",
             joinColumns =

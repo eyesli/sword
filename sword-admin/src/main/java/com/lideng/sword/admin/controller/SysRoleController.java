@@ -60,7 +60,7 @@ public class SysRoleController {
 
 	////@PreAuthorize("hasAuthority('sys:role:view')")
 	@RequestMapping(value="/saveRoleMenus",method = RequestMethod.POST)
-	public HttpResult saveRoleMenus(@RequestBody List<SysRoleMenuCreateDTO> records) {
+	public HttpResult saveRoleMenus(@RequestBody SysRoleMenuCreateDTO records) {
 		return HttpResult.ok(sysRoleService.saveRoleMenus(records),"保存成功");
 	}
 

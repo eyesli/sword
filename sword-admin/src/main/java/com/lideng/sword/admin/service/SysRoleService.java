@@ -33,7 +33,7 @@ public interface SysRoleService {
 	 * @param records
 	 * @return
 	 */
-	int saveRoleMenus(List<SysRoleMenuCreateDTO> records);
+	int saveRoleMenus(SysRoleMenuCreateDTO records);
 
 	SysRole create(SysRoleCreateDTO record);
 
