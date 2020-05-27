@@ -1,9 +1,6 @@
 package com.lideng.sword.admin.service.impl;
 
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 import com.lideng.sword.admin.model.entity.MenuType;
 import com.lideng.sword.admin.model.entity.SysUser;
@@ -93,7 +90,7 @@ public class SysMenuServiceImpl implements SysMenuService {
 		if(StringUtils.isBlank(userName) || SysConstants.ADMIN.getValue().equalsIgnoreCase(userName)) {
 			return menuRepository.findAll();
 		}
-		SysUser byName = userRepository.findByName(userName).get();
+		SysUser byName = userRepository.findByName(userName).orElseThrow(NoSuchElementException::new);
 		return byName.getSysRole().getSysMenu();
 	}
 
