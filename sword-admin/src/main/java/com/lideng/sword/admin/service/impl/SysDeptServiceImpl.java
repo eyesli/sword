@@ -68,7 +68,7 @@ public class SysDeptServiceImpl implements SysDeptService {
 		List<SysDept> sysDepts = new ArrayList<>();
 		List<SysDept> depts = sysDeptRepository.findAll();
 		for (SysDept dept : depts) {
-			if (StringUtils.isBlank(dept.getParentId())) {
+			if (dept.getParentId().equals("0")) {
 				dept.setLevel(0);
 				dept.setKey(dept.getId());
 				dept.setValue(dept.getId());

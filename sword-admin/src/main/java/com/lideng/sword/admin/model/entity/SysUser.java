@@ -46,7 +46,7 @@ public class SysUser extends BaseModel {
     private AccountStatus status;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "role_id",insertable = false, updatable = false)
+    @JoinColumn(name = "role_id",insertable = false, updatable = false,foreignKey = @ForeignKey(name = "none" ,value = ConstraintMode.NO_CONSTRAINT))
     private SysRole sysRole;
 
 

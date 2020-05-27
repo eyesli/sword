@@ -34,16 +34,16 @@ public class SwordControllerAdvice {
      */
     @ResponseBody
     @ExceptionHandler(value = Exception.class)
-    public Map errorHandler(Exception ex) {
-        Map map = new HashMap();
+    public Map<String,Object> errorHandler(Exception ex) {
+        Map<String,Object> map  = new HashMap<>(2);
         map.put("code", 100);
         map.put("msg", ex.getMessage());
         return map;
     }
     @ResponseBody
     @ExceptionHandler(value = SwordException.class)
-    public Map swordErrorHandler(SwordException ex) {
-        Map map = new HashMap();
+    public Map<String,Object> swordErrorHandler(SwordException ex) {
+        Map<String,Object> map  = new HashMap<>(2);
         map.put("code", ex.getCode());
         map.put("msg", ex.getMsg());
         return map;

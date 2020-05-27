@@ -47,7 +47,7 @@ public class SysMenuController {
 	//@PreAuthorize("hasAuthority('sys:menu:view')")
 	@RequestMapping(value="/findNavTree",method = RequestMethod.GET)
 	public HttpResult findNavTree(@RequestParam String userName) {
-		return HttpResult.ok(sysMenuService.findTree(userName, 1));
+		return HttpResult.ok(sysMenuService.findTree(userName, 0));
 	}
 	
 	////@PreAuthorize("hasAuthority('sys:menu:view')")

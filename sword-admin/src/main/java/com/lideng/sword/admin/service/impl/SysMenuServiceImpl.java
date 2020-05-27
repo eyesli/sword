@@ -3,11 +3,14 @@ package com.lideng.sword.admin.service.impl;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Optional;
 
 import com.lideng.sword.admin.model.entity.MenuType;
+import com.lideng.sword.admin.model.entity.SysUser;
 import com.lideng.sword.admin.model.request.SysMenuCreateDTO;
 import com.lideng.sword.admin.model.request.SysMenuUpdateDTO;
 import com.lideng.sword.admin.repository.MenuRepository;
+import com.lideng.sword.admin.repository.UserRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
@@ -30,6 +33,8 @@ public class SysMenuServiceImpl implements SysMenuService {
 	@Autowired
 	private MenuRepository menuRepository;
 
+	@Autowired
+	private UserRepository userRepository;
 
 
 
@@ -88,8 +93,8 @@ public class SysMenuServiceImpl implements SysMenuService {
 		if(StringUtils.isBlank(userName) || SysConstants.ADMIN.getValue().equalsIgnoreCase(userName)) {
 			return menuRepository.findAll();
 		}
-		//todo 这里要连表查询 由于用的都是admin 所以暂时没问题。这里是要查权限注解的
-		return menuRepository.findByName(userName);
+		SysUser byName = userRepository.findByName(userName).get();
+		return byName.getSysRole().getSysMenu();
 	}
 
 	private void findChildren(List<SysMenu> SysMenus, List<SysMenu> menus, int menuType) {

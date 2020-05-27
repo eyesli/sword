@@ -62,9 +62,9 @@ public class SysUserServiceImpl  implements SysUserService {
 
 		SysUser sysUser = userRepository.findById(record.getId()).orElseThrow(NoSuchElementException::new);
 
-		if(ADMIN.getValue().equals(sysUser.getName())) {
-			throw new SwordException("超级管理员不允许修改!");
-		}
+//		if(ADMIN.getValue().equals(sysUser.getName())) {
+//			throw new SwordException("超级管理员不允许修改!");
+//		}
 //		if(!record.getPassword().equals(sysUser.getPassword())) {
 //			String password = PasswordUtils.encode(record.getPassword(), sysUser.getSalt());
 //			record.setPassword(password);

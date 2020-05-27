@@ -62,9 +62,9 @@ public class SysRoleServiceImpl  implements SysRoleService {
 	public SysRole update(SysRoleUpdateDTO record) {
 
 		SysRole sysRole = roleRepository.getOne(record.getId());
-		if(ADMIN.getValue().equals(sysRole.getName())) {
-			throw new SwordException("超级管理员不允许修改!");
-		}
+//		if(ADMIN.getValue().equals(sysRole.getName())) {
+//			throw new SwordException("超级管理员不允许修改!");
+//		}
 		BeanUtils.copyProperties(record,sysRole);
 		sysRole.setVersion(sysRole.getVersion()+1);
 		return roleRepository.save(sysRole);
@@ -111,9 +111,9 @@ public class SysRoleServiceImpl  implements SysRoleService {
 		String roleId = records.getRoleId();
 		List<String> menuIdList = records.getMenuId();
 		SysRole sysRole = roleRepository.getOne(roleId);
-		if(ADMIN.getValue().equalsIgnoreCase(sysRole.getName())){
-			throw new SwordException("超级管理员拥有所有菜单权限，不允许修改！");
-		}
+//		if(ADMIN.getValue().equalsIgnoreCase(sysRole.getName())){
+//			throw new SwordException("超级管理员拥有所有菜单权限，不允许修改！");
+//		}
 
 		sysRole.setSysMenu(menuRepository.findAllById(menuIdList));
 		roleRepository.save(sysRole);
