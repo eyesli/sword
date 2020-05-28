@@ -31,7 +31,9 @@ public class SysDept extends BaseModel {
     private Integer orderNum;
 
 
-
+    /**
+     * 这三个字段纯粹是为了偷懒，前端的UI框架需要这三个字段，为了方便，就直接塞进去了
+     */
     @Transient
     private String title;
 

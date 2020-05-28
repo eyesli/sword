@@ -45,16 +45,17 @@ public class SysUser extends BaseModel {
     @Enumerated(EnumType.ORDINAL)
     private AccountStatus status;
 
+   // @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "role_id",insertable = false, updatable = false,foreignKey = @ForeignKey(name = "none" ,value = ConstraintMode.NO_CONSTRAINT))
     private SysRole sysRole;
 
 
     /*
-    这个注解是json序列化的时候会出现问题，懒加载 的时候会出现问题，但是我这里写的是立即加载还是还会有错
-    加这个注解就序列化正常，跟懒加载有关系，没深入看
+        hibernate对象懒加载，json序列化失败,因为懒加载这个对象属性只是一个代理对象，如果json直接当作一个存在的属性去序列化就会出现错误
+        在使用hibernate的时候，查询数据库后产生的实体类是个代理类，这时候转换JSON会报错
      */
-    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+   // @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "dept_id",insertable = false, updatable = false)
     private SysDept sysDept;

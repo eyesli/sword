@@ -47,8 +47,9 @@ public class SysRole  extends BaseModel {
     )
     private List<SysMenu> sysMenu;
 
-    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-    @ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.DETACH)
+    //@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+    @ManyToOne(fetch = FetchType.EAGER,cascade = CascadeType.DETACH)
     @JoinColumn(name = "dept_id",insertable = false, updatable = false)
     private SysDept sysDept;
+
 }
