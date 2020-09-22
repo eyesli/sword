@@ -1,6 +1,6 @@
 ## sword项目介绍
 
-sword是一个前后端分离的权限管理系统，项目采用 SpringBoot+mybatis||SpringBoot+JPA 开发，计划采用react作为前端框架。
+sword是一个前后端分离的权限管理系统，项目采用 SpringBoot+mybatis||SpringBoot+JPA 开发，计划采用react作为前端框架。项目地址：https://github.com/eyesli/sword-react
 
 ### 项目技术栈
 
