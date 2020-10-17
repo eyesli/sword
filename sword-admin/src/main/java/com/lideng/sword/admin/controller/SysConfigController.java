@@ -25,32 +25,12 @@ public class SysConfigController {
 	@Autowired
 	private SysConfigService sysConfigService;
 	
-	//@PreAuthorize("hasAuthority('sys:config:add') AND hasAuthority('sys:config:edit')")
-	@RequestMapping(value="/create",method = RequestMethod.POST)
-	public HttpResult create(@RequestBody SysConfigSaveDTO record) {
-		return HttpResult.ok(sysConfigService.create(record),"创建成功");
-	}
 
-	//@PreAuthorize("hasAuthority('sys:config:add') AND hasAuthority('sys:config:edit')")
-	@RequestMapping(value="/update",method = RequestMethod.POST)
-	public HttpResult update(@RequestBody SysConfigUpdateDTO record) {
-		return HttpResult.ok(sysConfigService.update(record),"更新成功");
-	}
+//	@RequestMapping(value="/create",method = RequestMethod.POST)
+//	public HttpResult create(@RequestBody SysConfigSaveDTO record) {
+//		return HttpResult.ok(sysConfigService.create(record),"创建成功");
+//	}
 
-	//@PreAuthorize("hasAuthority('sys:config:delete')")
-	@RequestMapping(value="/delete",method = RequestMethod.POST)
-	public HttpResult delete(@ApiParam(value = "只用传ID")@RequestBody List<String> ids) {
-		return HttpResult.ok(sysConfigService.delete(ids),"删除成功");
-	}
 
-	//@PreAuthorize("hasAuthority('sys:config:view')")
-	@RequestMapping(value="/findByLabel",method = RequestMethod.GET)
-	public HttpResult findByLabel(@RequestParam String label) {
-		return HttpResult.ok(sysConfigService.findByLabel(label));
-	}
 
-	@RequestMapping(value="/test",method = RequestMethod.GET)
-	public HttpResult test(@RequestParam String label) {
-		return HttpResult.ok(sysConfigService.test(label));
-	}
 }

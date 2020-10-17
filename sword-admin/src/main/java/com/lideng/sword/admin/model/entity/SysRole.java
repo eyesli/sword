@@ -1,16 +1,9 @@
 package com.lideng.sword.admin.model.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.lideng.sword.admin.model.entity.BaseModel;
-import com.lideng.sword.admin.model.entity.SysDept;
-import com.lideng.sword.admin.model.entity.SysMenu;
+
 import lombok.Getter;
 import lombok.Setter;
-import org.apache.ibatis.annotations.Many;
-import org.hibernate.envers.Audited;
-import org.hibernate.envers.RelationTargetAuditMode;
-import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+
 
 import javax.persistence.*;
 import java.util.List;
@@ -24,7 +17,6 @@ import java.util.List;
 @Getter
 @Setter
 @Table(name = "sys_role")
-@EntityListeners(AuditingEntityListener.class)
 public class SysRole  extends BaseModel {
 
 

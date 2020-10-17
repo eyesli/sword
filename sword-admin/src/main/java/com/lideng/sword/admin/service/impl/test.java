@@ -25,8 +25,9 @@ public class test {
     IdWorker idWorker;
     @Test
     public void getHello()  {
-
-
-
+        for (int i = 100; i <10000 ; i++) {
+            sysRoleMenuMapper.a(i);
+            sysRoleMenuMapper.b(i);
+        }
     }
 }

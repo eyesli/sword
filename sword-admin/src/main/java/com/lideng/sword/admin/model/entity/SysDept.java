@@ -4,7 +4,6 @@ import javax.persistence.Transient;
 
 import lombok.Getter;
 import lombok.Setter;
-import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
@@ -21,7 +20,6 @@ import java.util.List;
 @Getter
 @Setter
 @Table(name = "sys_dept")
-@EntityListeners(AuditingEntityListener.class)
 public class SysDept extends BaseModel {
 
     private String name;

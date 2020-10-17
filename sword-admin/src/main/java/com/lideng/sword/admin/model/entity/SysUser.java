@@ -4,9 +4,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Getter;
 import lombok.Setter;
-import org.hibernate.envers.Audited;
-import org.hibernate.envers.RelationTargetAuditMode;
-import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 
@@ -19,7 +16,6 @@ import javax.persistence.*;
 @Getter
 @Setter
 @Table(name = "sys_user")
-@EntityListeners(AuditingEntityListener.class)
 public class SysUser extends BaseModel {
 
     private String name;

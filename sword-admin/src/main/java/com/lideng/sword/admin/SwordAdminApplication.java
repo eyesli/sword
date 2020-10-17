@@ -4,7 +4,6 @@ import com.lideng.sword.common.utils.IdWorker;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
-import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.scheduling.annotation.EnableScheduling;
 
@@ -14,7 +13,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
  * @author lideng
  * @date July 30, 2019
  */
-@EnableJpaAuditing
+
 @EnableAsync
 public class SwordAdminApplication {
 

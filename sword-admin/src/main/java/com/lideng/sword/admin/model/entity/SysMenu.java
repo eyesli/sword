@@ -2,7 +2,6 @@ package com.lideng.sword.admin.model.entity;
 
 import lombok.Getter;
 import lombok.Setter;
-import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import java.util.List;
@@ -16,7 +15,6 @@ import java.util.List;
 @Getter
 @Setter
 @Table(name = "sys_menu")
-@EntityListeners(AuditingEntityListener.class)
 public class SysMenu extends BaseModel {
 
 
