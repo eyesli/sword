@@ -3,12 +3,9 @@ package com.lideng.sword.admin.service;
 import java.util.List;
 import java.util.Set;
 
-import com.github.pagehelper.PageInfo;
 import com.lideng.sword.admin.model.entity.SysUser;
-import com.lideng.sword.admin.model.entity.SysUserRole;
 import com.lideng.sword.admin.model.request.SysUserCreateDTO;
 import com.lideng.sword.admin.model.request.SysUserUpdateDTO;
-import javax.servlet.http.HttpServletRequest;
 
 
 /**
@@ -32,14 +29,17 @@ public interface SysUserService  {
 	 * @param
 	 * @return
 	 */
-	List<SysUserRole> findUserRoles(String userId);
+//	List<SysRole> findUserRoles(String userId);
+//
+	String create(SysUserCreateDTO record);
 
-	String create(SysUserCreateDTO record, HttpServletRequest request);
-
-	String update(SysUserUpdateDTO record, HttpServletRequest request);
+	SysUser update(SysUserUpdateDTO record);
 
 	int delete(List<String> ids);
 
-	PageInfo<SysUser> findUserPage(Integer page, Integer size);
+
+	List <SysUser >findUserList();
+
+	void deleteById(String id);
 
 }

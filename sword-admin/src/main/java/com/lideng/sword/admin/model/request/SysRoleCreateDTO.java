@@ -14,8 +14,6 @@ public class SysRoleCreateDTO{
 
     private String name;
 
-    private String remark;
-
-    private Boolean delFlag;
+    private String desc;
 
 }

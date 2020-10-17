@@ -5,7 +5,6 @@ import java.util.List;
 import com.lideng.sword.admin.model.entity.SysDict;
 import com.lideng.sword.admin.model.request.SysDictCreateDTO;
 import com.lideng.sword.admin.model.request.SysDictUpdateDTO;
-import javax.servlet.http.HttpServletRequest;
 
 
 /**
@@ -25,9 +24,9 @@ public interface SysDictService  {
 
 
 
-	int create(SysDictCreateDTO record, HttpServletRequest request);
+	String create(SysDictCreateDTO record);
 
-	int update(SysDictUpdateDTO record, HttpServletRequest request);
+	String update(SysDictUpdateDTO record);
 
 
 	int delete(List<String> ids);

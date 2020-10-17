@@ -23,6 +23,4 @@ public class SysDictUpdateDTO {
 
     private String remarks;
 
-    private Boolean delFlag;
-
 }

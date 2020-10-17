@@ -23,7 +23,7 @@ import org.springframework.security.web.authentication.logout.HttpStatusReturnin
  */
 @Configuration
 @EnableWebSecurity	// 开启Spring Security
-@EnableGlobalMethodSecurity(prePostEnabled = true)	// 开启权限注解，如：@PreAuthorize注解
+@EnableGlobalMethodSecurity(prePostEnabled = true)	// 开启权限注解，如：//@PreAuthorize注解
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired

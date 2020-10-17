@@ -21,8 +21,6 @@ public enum SysConstants {
 
 
 
-
-
     private String value;
 
 }

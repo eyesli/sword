@@ -8,6 +8,7 @@ import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.lideng.sword.admin.model.entity.AccountStatus;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.web.bind.annotation.*;
@@ -89,16 +90,13 @@ public class SysLoginController {
 			return HttpResult.error("密码不正确");
 		}
 		// 账号锁定
-		if (!user.isStatus()) {
+		if (AccountStatus.DISABLE.equals(user.getStatus())) {
 			return HttpResult.error("账号已被锁定,请联系管理员");
 		}
 		// 系统登录认证
 		JwtAuthenticatioToken token = SecurityUtils.login(request, username, password, authenticationManager);
+		token.setSysUser(user);
 		return HttpResult.ok(token);
-	}
-	@GetMapping(value = "/info")
-	public HttpResult info()   {
-		return HttpResult.ok("ok");
 	}
 
 }

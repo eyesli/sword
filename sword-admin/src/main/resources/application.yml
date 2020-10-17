@@ -1,5 +1,6 @@
 server:
   port: 8001
+
 spring:
   datasource:
     name: druidDataSource
@@ -23,6 +24,12 @@ spring:
       pool-prepared-statements: true
       max-open-prepared-statements: 50
       max-pool-prepared-statement-per-connection-size: 20
+
+#     去掉  Spring Data Redis - Could not safely identify store assignment for repositor
+  data:
+    redis:
+      repositories:
+        enabled: false
   redis:
     host: 127.0.0.1
     port: 6379
@@ -43,6 +50,30 @@ spring:
     properties:
       hibernate:
        dialect: com.lideng.sword.common.utils.MySQL5DialectUTF8
+#       envers:
+#         audit_table_suffix=_history:
+##
+#  <props>
+#  <!--配置审计表名的后缀，默认为空 -->
+#  <prop key="org.hibernate.envers.audit_table_suffix"></prop>
+#  <!--配置审计表名的前缀，默认为_AUD -->
+#  <prop key="org.hibernate.envers.audit_table_prefix">V_</prop>
+#  <!--配置审计表中记录版本号的字段名称 -->
+#  <prop key="org.hibernate.envers.revision_field_name">VER</prop>
+#  <!--配置审计表中数据操作类型的字段名称，0：新增 1：修改 2：删除 -->
+#  <prop key="org.hibernate.envers.revision_type_field_name">REVTYPE</prop>
+#  <!--配置是否支持关联表修改时记录修改记录,默认为true -->
+#  <prop key="org.hibernate.envers.revision_on_collection_change">true</prop>
+#  <!--配置是否不对乐观锁字段修改时记录修改记录，即使用Version字段，默认值为true -->
+#  <prop key="org.hibernate.envers.do_not_audit_optimistic_locking_field">true</prop>
+#  <!--配置是否在删除操作时，记录所有字段还是只记录id值。默认为false false：只记录id true：记录全部字段 -->
+#  <prop key="org.hibernate.envers.store_data_at_delete">true</prop>
+#  <!--配置审计表的schema，默认为null -->
+#  <prop key="org.hibernate.envers.default_schema">DateBaseName</prop>
+#  <!--配置审计表的catalog，默认为null -->
+#  <prop key="org.hibernate.envers.default_catalog"></prop>
+#  </props>
+
 logging:
   path: ./
   file: log.log

@@ -17,6 +17,4 @@ public class SysDeptCreateDTO   {
 
     private Integer orderNum;
 
-    private Boolean delFlag;
-
 }

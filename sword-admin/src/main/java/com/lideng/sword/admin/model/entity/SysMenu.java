@@ -1,8 +1,10 @@
 package com.lideng.sword.admin.model.entity;
 
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
+import javax.persistence.*;
 import java.util.List;
 
 /**
@@ -10,41 +12,50 @@ import java.util.List;
  * @author lideng
  * @date Sep 13, 2018
  */
-@Data
-@EqualsAndHashCode(callSuper=false)
+@Entity
+@Getter
+@Setter
+@Table(name = "sys_menu")
+@EntityListeners(AuditingEntityListener.class)
 public class SysMenu extends BaseModel {
 
-    private String parentId;
 
     private String name;
 
     private String url;
+
+    private String parentId;
+
 
     /**
      * 权限标识
      */
     private String perms;
 
-    private Integer type;
+    @Enumerated(EnumType.ORDINAL)
+    private MenuType type;
 
     private String icon;
 
     private Integer orderNum;
 
-    private boolean delFlag;
 
-    /**
-     * 非数据库字段
-     */
+    @Transient
     private String parentName;
-    /**
-     * 非数据库字段
-     */
+
+    @Transient
     private Integer level;
 
-    /**
-     * 非数据库字段
-     */
+    @Transient
     private List<SysMenu> children;
+
+    @Transient
+    private String title;
+
+    @Transient
+    private String key;
+
+    @Transient
+    private String value;
 
 }

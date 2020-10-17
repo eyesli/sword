@@ -27,6 +27,4 @@ public class SysConfigUpdateDTO implements Serializable,Cloneable {
 
     private String remarks;
 
-    private Boolean delFlag;
-
 }

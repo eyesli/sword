@@ -14,8 +14,7 @@ public class SysRoleUpdateDTO {
 
     private String name;
 
-    private String remark;
+    private String description;
 
-    private Boolean delFlag;
 
 }

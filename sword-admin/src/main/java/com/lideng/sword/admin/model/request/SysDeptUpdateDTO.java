@@ -15,6 +15,4 @@ public class SysDeptUpdateDTO {
 
     private Integer orderNum;
 
-    private Boolean delFlag;
-
 }

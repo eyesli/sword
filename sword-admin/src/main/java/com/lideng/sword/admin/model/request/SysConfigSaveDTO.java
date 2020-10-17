@@ -24,5 +24,4 @@ public class SysConfigSaveDTO implements Serializable,Cloneable{
 
     private String remarks;
 
-    private Boolean delFlag;
 }

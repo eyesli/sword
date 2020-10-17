@@ -24,25 +24,31 @@ public class SysDeptController {
 	@Autowired
 	private SysDeptService sysDeptService;
 	
-	@PreAuthorize("hasAuthority('sys:dept:add') AND hasAuthority('sys:dept:edit')")
+	////@PreAuthorize("hasAuthority('sys:dept:add') AND hasAuthority('sys:dept:edit')")
 	@RequestMapping(value="/create",method = RequestMethod.POST)
-	public HttpResult create(@RequestBody SysDeptCreateDTO record, HttpServletRequest request) {
-		return HttpResult.ok(sysDeptService.create(record,request));
+	public HttpResult create(@RequestBody SysDeptCreateDTO record) {
+		return HttpResult.ok(sysDeptService.create(record));
 	}
 
-	@PreAuthorize("hasAuthority('sys:config:add') AND hasAuthority('sys:config:edit')")
+	////@PreAuthorize("hasAuthority('sys:config:add') AND hasAuthority('sys:config:edit')")
 	@RequestMapping(value="/update",method = RequestMethod.POST)
-	public HttpResult update(@RequestBody SysDeptUpdateDTO record, HttpServletRequest request) {
-		return HttpResult.ok(sysDeptService.update(record,request));
+	public HttpResult update(@RequestBody SysDeptUpdateDTO record) {
+		return HttpResult.ok(sysDeptService.update(record));
 	}
 
-	@PreAuthorize("hasAuthority('sys:dept:delete')")
-	@RequestMapping(value="/delete",method = RequestMethod.POST)
-	public HttpResult delete(@ApiParam(value = "只用传ID")@RequestBody List<String> ids) {
-		return HttpResult.ok(sysDeptService.delete(ids));
+	////@PreAuthorize("hasAuthority('sys:dept:delete')")
+	@RequestMapping(value="/delete",method = RequestMethod.GET)
+	public HttpResult delete(@ApiParam(value = "只用传ID")@RequestParam String id) {
+		sysDeptService.delete(id);
+		return HttpResult.ok(200,"删除成功");
 	}
 
-	@PreAuthorize("hasAuthority('sys:dept:view')")
+	@RequestMapping(value="/findDepartmentById",method = RequestMethod.GET)
+	public HttpResult findDeptById(@RequestParam String id) {
+		return HttpResult.ok(sysDeptService.findById(id),"查询结果");
+	}
+
+	////@PreAuthorize("hasAuthority('sys:dept:view')")
 	@RequestMapping(value="/findTree",method = RequestMethod.GET)
 	public HttpResult findTree() {
 		return HttpResult.ok(sysDeptService.findTree());

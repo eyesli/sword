@@ -1,17 +1,27 @@
 package com.lideng.sword.admin.model.entity;
 
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import javax.persistence.Transient;
 
+import lombok.Getter;
+import lombok.Setter;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+
+import javax.persistence.Entity;
+import javax.persistence.EntityListeners;
+import javax.persistence.Table;
 import java.util.List;
+
 
 /**
  * 基础模型
  * @author lideng
  * @date Sep 13, 2018
  */
-@Data
-@EqualsAndHashCode(callSuper=false)
+@Entity
+@Getter
+@Setter
+@Table(name = "sys_dept")
+@EntityListeners(AuditingEntityListener.class)
 public class SysDept extends BaseModel {
 
     private String name;
@@ -20,17 +30,27 @@ public class SysDept extends BaseModel {
 
     private Integer orderNum;
 
-    private boolean delFlag;
+
     /**
-     * 非数据库字段
+     * 这三个字段纯粹是为了偷懒，前端的UI框架需要这三个字段，为了方便，就直接塞进去了
      */
-    private List<SysDept> children;
-    /**
-     * 非数据库字段
-     */
-    private String parentName;
-    /**
-     * 非数据库字段
-     */
+    @Transient
+    private String title;
+
+    @Transient
+    private String key;
+
+    @Transient
+    private String value;
+
+
+
+    @Transient
     private Integer level;
+
+    @Transient
+    private List<SysDept> children;
+
+    @Transient
+    private String parentName;
 }

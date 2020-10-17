@@ -1,0 +1,48 @@
+/*
+SQLyog Ultimate v12.08 (64 bit)
+MySQL - 5.7.18 : Database - sword
+*********************************************************************
+*/
+
+/*!40101 SET NAMES utf8 */;
+
+/*!40101 SET SQL_MODE=''*/;
+
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+CREATE DATABASE /*!32312 IF NOT EXISTS*/`sword` /*!40100 DEFAULT CHARACTER SET latin1 */;
+
+USE `sword`;
+
+/*Table structure for table `sys_menu` */
+
+DROP TABLE IF EXISTS `sys_menu`;
+
+CREATE TABLE `sys_menu` (
+  `id` varchar(100) NOT NULL COMMENT '编号',
+  `name` varchar(50) DEFAULT NULL COMMENT '菜单名称',
+  `parent_id` varchar(100) DEFAULT NULL COMMENT '父菜单ID，一级菜单为0',
+  `url` varchar(200) DEFAULT NULL COMMENT '菜单URL,类型：1.普通页面（如用户管理， /sys/user） 2.嵌套完整外部页面，以http(s)开头的链接 3.嵌套服务器页面，使用iframe:前缀+目标URL(如SQL监控， iframe:/druid/login.html, iframe:前缀会替换成服务器地址)',
+  `perms` varchar(500) DEFAULT NULL COMMENT '授权(多个用逗号分隔，如：sys:user:add,sys:user:edit)',
+  `type` int(11) DEFAULT NULL COMMENT '类型   0：目录   1：菜单   2：按钮',
+  `icon` varchar(50) DEFAULT NULL COMMENT '菜单图标',
+  `order_num` int(11) DEFAULT NULL COMMENT '排序',
+  `create_by` varchar(50) DEFAULT NULL COMMENT '创建人',
+  `create_time` datetime DEFAULT NULL COMMENT '创建时间',
+  `last_update_by` varchar(50) DEFAULT NULL COMMENT '更新人',
+  `last_update_time` datetime DEFAULT NULL COMMENT '更新时间',
+  `del_flag` tinyint(4) DEFAULT '0' COMMENT '是否删除 1：正常 0：已删除',
+  `version` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='菜单管理';
+
+/*Data for the table `sys_menu` */
+
+insert  into `sys_menu`(`id`,`name`,`parent_id`,`url`,`perms`,`type`,`icon`,`order_num`,`create_by`,`create_time`,`last_update_by`,`last_update_time`,`del_flag`,`version`) values ('1','系统管理','0','/guanli',NULL,0,'el-icon-setting',1,NULL,NULL,NULL,NULL,1,0),('10','修改','7',NULL,'sys:dept:edit',2,NULL,0,NULL,NULL,NULL,NULL,1,0),('11','删除','7',NULL,'sys:dept:delete',2,NULL,0,NULL,NULL,NULL,NULL,1,0),('111','首页','0','/home','sys:dept:view',0,'home',0,NULL,NULL,NULL,NULL,0,0),('112','商品','0','/products','sys:dept:view',0,'appstore',0,NULL,NULL,NULL,NULL,0,0),('113','品类管理','112','/producs/category','sys:dept:view',1,'bars',0,NULL,NULL,NULL,NULL,0,0),('114','商品管理','112','/product','sys:dept:view',1,'tool',0,NULL,NULL,NULL,NULL,0,0),('1182909642653700096','LOL','0','/lol','',0,'',0,'admin','2019-10-12 14:43:31','admin','2019-10-12 15:03:21',1,3),('1182954767689846784','S9全球总决赛','1182909642653700096','/juesai','',1,'string',0,'admin','2019-10-12 17:42:50',NULL,NULL,1,0),('1182954825495744512','MSI','1182909642653700096','/msi','',1,'string',0,'admin','2019-10-12 17:43:03',NULL,NULL,1,0),('1182954877161181184','洲际赛I','1182909642653700096','/zhoujisai','',1,'string',0,'admin','2019-10-12 17:43:16',NULL,NULL,1,0),('1182955585755287552','查看S9全球总决赛','1182954767689846784','','',2,'string',0,'admin','2019-10-12 17:46:05',NULL,NULL,1,0),('1182955688779976704','删除S9全球总决赛','1182954767689846784','','',2,'string',0,'admin','2019-10-12 17:46:29',NULL,NULL,1,0),('1182956013305860096','删除MSI','1182954825495744512','','',2,'string',0,'admin','2019-10-12 17:47:46',NULL,NULL,1,0),('1182956045807521792','查看MSI','1182954825495744512','','',2,'string',0,'admin','2019-10-12 17:47:54',NULL,NULL,1,0),('1182956104938819584','查看洲际赛','1182954877161181184','','',2,'string',0,'admin','2019-10-12 17:48:08',NULL,NULL,1,0),('1182956137436286976','删除洲际赛','1182954877161181184','','',2,'string',0,'admin','2019-10-12 17:48:16',NULL,NULL,1,0),('12','角色管理','1','/sys/role',NULL,1,'el-icon-view',4,NULL,NULL,NULL,NULL,1,0),('1265181092902735872','用户管理','0','/user','0',0,'user',0,'anonymousUser','2020-05-26 15:20:53','anonymousUser','2020-05-26 15:20:53',NULL,0),('1265181314928218112','部门管理','0','/department','0',0,'tool',0,'anonymousUser','2020-05-26 15:21:46','anonymousUser','2020-05-26 15:21:46',NULL,0),('1265181440421793792','角色管理','0','/role','0',0,'safety',0,'anonymousUser','2020-05-26 15:22:16','anonymousUser','2020-05-26 15:22:16',NULL,0),('1265181652594855936','图形图表','0','/charts','0',0,'area-chart',2,'anonymousUser','2020-05-26 15:23:07','anonymousUser','2020-05-26 15:23:07',NULL,0),('1265181955478130688','柱形图','1265181652594855936','/charts/bar','0',1,'bar-chart',0,'anonymousUser','2020-05-26 15:24:19','anonymousUser','2020-05-26 15:24:19',NULL,0),('1265182078006333440','折线图','1265181652594855936','/charts/line','0',1,'bar-chart',0,'anonymousUser','2020-05-26 15:24:48','anonymousUser','2020-05-26 15:24:48',NULL,0),('1265182148097347584','饼图','1265181652594855936','/charts/pie','0',1,'bar-chart',0,'anonymousUser','2020-05-26 15:25:05','anonymousUser','2020-05-26 15:25:05',NULL,0),('1265182614029996032','订单管理','0','/order','0',0,'bar-chart',1,'anonymousUser','2020-05-26 15:26:56','anonymousUser','2020-05-26 15:26:56',NULL,0),('13','查看','12',NULL,'sys:role:view',2,NULL,0,NULL,NULL,NULL,NULL,1,0),('14','新增','12',NULL,'sys:role:add',2,NULL,0,NULL,NULL,NULL,NULL,1,0),('15','修改','12',NULL,'sys:role:edit',2,NULL,0,NULL,NULL,NULL,NULL,1,0),('16','删除','12',NULL,'sys:role:delete',2,NULL,0,NULL,NULL,NULL,NULL,1,0),('17','菜单管理','1','/sys/menu',NULL,1,'el-icon-menu',5,NULL,NULL,NULL,NULL,1,0),('18','查看','17',NULL,'sys:menu:view',2,NULL,0,NULL,NULL,NULL,NULL,1,0),('19','新增','17',NULL,'sys:menu:add',2,NULL,0,NULL,NULL,NULL,NULL,1,0),('2','用户管理','1','/sys/user',NULL,1,'el-icon-service',1,NULL,NULL,NULL,NULL,1,0),('20','修改','17',NULL,'sys:menu:edit',2,NULL,0,NULL,NULL,NULL,NULL,1,0),('21','删除','17',NULL,'sys:menu:delete',2,NULL,0,NULL,NULL,NULL,NULL,1,0),('22','字典管理','1','/sys/dict',NULL,1,'el-icon-edit-outline',7,NULL,NULL,NULL,NULL,1,0),('23','查看','22',NULL,'sys:dict:view',2,NULL,0,NULL,NULL,NULL,NULL,1,0),('24','新增','22',NULL,'sys:dict:add',2,NULL,0,NULL,NULL,NULL,NULL,1,0),('25','修改','22',NULL,'sys:dict:edit',2,NULL,0,NULL,NULL,NULL,NULL,1,0),('26','删除','22',NULL,'sys:dict:delete',2,NULL,0,NULL,NULL,NULL,NULL,1,0),('27','系统配置','1','/sys/config',NULL,1,'el-icon-edit-outline',7,NULL,NULL,NULL,NULL,1,0),('28','查看','27',NULL,'sys:config:view',2,NULL,0,NULL,NULL,NULL,NULL,1,0),('29','新增','27',NULL,'sys:config:add',2,NULL,0,NULL,NULL,NULL,NULL,1,0),('3','查看','2',NULL,'sys:user:view',2,NULL,0,NULL,NULL,NULL,NULL,1,0),('30','修改','27',NULL,'sys:config:edit',2,NULL,0,NULL,NULL,NULL,NULL,1,0),('31','删除','27',NULL,'sys:config:delete',2,NULL,0,NULL,NULL,NULL,NULL,1,0),('32','登录日志','1','/sys/loginlog',NULL,1,'el-icon-info',8,NULL,NULL,'admin','2018-09-23 19:32:28',1,0),('33','查看','32',NULL,'sys:loginlog:view',2,NULL,0,NULL,NULL,NULL,NULL,1,0),('34','删除','32',NULL,'sys:loginlog:delete',2,NULL,0,NULL,NULL,NULL,NULL,1,0),('35','操作日志','1','/sys/log',NULL,1,'el-icon-info',8,NULL,NULL,'admin','2018-09-23 19:32:28',1,0),('36','查看','35',NULL,'sys:log:view',2,NULL,0,NULL,NULL,NULL,NULL,1,0),('37','删除','35',NULL,'sys:log:delete',2,NULL,0,NULL,NULL,NULL,NULL,1,0),('38','系统监控','0','/jiankong','',0,'el-icon-info',4,'admin','2018-12-27 10:57:29','admin','2019-01-10 17:31:04',1,0),('39','数据监控','38','http://127.0.0.1:8001/druid/login.html',NULL,1,'el-icon-warning',0,NULL,NULL,'admin','2018-12-27 11:03:45',1,0),('4','新增','2',NULL,'sys:user:add',2,NULL,0,NULL,NULL,NULL,NULL,1,0),('40','查看','39',NULL,'sys:druid:view',2,NULL,0,NULL,NULL,NULL,NULL,1,0),('41','服务监控','38','http://127.0.0.1:8000/',NULL,1,'el-icon-view',1,'admin','2018-11-02 20:02:15','admin','2018-12-27 11:03:53',1,0),('42','查看','41',NULL,'sys:monitor:view',2,NULL,0,NULL,NULL,NULL,NULL,1,0),('42312','新增','0','/test',NULL,0,NULL,3,NULL,NULL,NULL,NULL,0,0),('43','服务治理','0','/zhili','',0,'el-icon-service',2,'admin','2018-12-27 11:05:48','admin','2018-12-27 11:06:39',1,0),('43231','test','42312','/s',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,0,0),('44','注册中心','43','http://127.0.0.1:8500',NULL,1,' el-icon-view',0,'admin','2018-11-03 11:06:48','admin','2018-12-27 11:08:11',1,0),('45','查看','44',NULL,'sys:consul:view',2,NULL,0,NULL,NULL,NULL,NULL,1,0),('46','接口文档','0','http://127.0.0.1:8001/swagger-ui.html',NULL,1,'el-icon-document',3,NULL,NULL,'admin','2018-12-27 11:04:18',1,0),('47','查看','46',NULL,'sys:swagger:view',2,NULL,0,NULL,NULL,NULL,NULL,1,0),('48','代码生成','0','/generator/generator','',1,'el-icon-star-on',5,'admin','2018-11-15 14:39:30','admin','2018-11-15 14:56:18',1,0),('49','查看','48',NULL,'sys:generator:view',2,NULL,0,NULL,NULL,NULL,NULL,1,0),('5','修改','2',NULL,'sys:user:edit',2,NULL,0,NULL,NULL,NULL,NULL,1,0),('50','在线用户','0','/sys/online','',1,'el-icon-view',5,'admin','2018-11-15 14:39:30','admin','2018-11-15 14:56:18',1,0),('51','查看','50',NULL,'sys:online:view',2,NULL,0,NULL,NULL,NULL,NULL,1,0),('52','使用案例','0','/anli',NULL,0,'el-icon-picture-outline',6,NULL,NULL,'admin','2018-11-15 14:39:43',1,0),('53','国际化','52','/demo/i18n',NULL,1,'el-icon-edit',1,NULL,NULL,NULL,NULL,1,0),('54','查看','53',NULL,'sys:dict:view',2,NULL,0,NULL,NULL,NULL,NULL,1,0),('55','换皮肤','52','/demo/theme',NULL,1,'el-icon-picture',2,NULL,NULL,NULL,NULL,1,0),('56','查看','55',NULL,'sys:dict:view',2,NULL,0,NULL,NULL,NULL,NULL,1,0),('6','删除','2',NULL,'sys:user:delete',2,NULL,0,NULL,NULL,NULL,NULL,1,0),('7','机构管理','1','/sys/dept',NULL,1,'el-icon-news',2,NULL,NULL,NULL,NULL,1,0),('8','查看','7',NULL,'sys:dept:view',2,NULL,0,NULL,NULL,NULL,NULL,1,0),('9','新增','7',NULL,'sys:dept:add',2,NULL,0,NULL,NULL,NULL,NULL,1,0);
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;

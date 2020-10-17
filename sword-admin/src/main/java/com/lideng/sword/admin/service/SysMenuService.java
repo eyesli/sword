@@ -7,9 +7,6 @@ import com.lideng.sword.admin.model.request.SysMenuCreateDTO;
 import com.lideng.sword.admin.model.request.SysMenuUpdateDTO;
 
 
-import javax.servlet.http.HttpServletRequest;
-
-
 /**
  * 菜单管理
  * @author lideng
@@ -33,9 +30,9 @@ public interface SysMenuService  {
 	List<SysMenu> findByUser(String userName);
 
 
-	int create(SysMenuCreateDTO record, HttpServletRequest request);
+	String create(SysMenuCreateDTO record);
 
-	int update(SysMenuUpdateDTO record, HttpServletRequest request);
+	String update(SysMenuUpdateDTO record);
 
 	int delete(List<String> ids);
 

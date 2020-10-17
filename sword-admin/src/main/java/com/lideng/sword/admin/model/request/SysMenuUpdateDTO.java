@@ -26,7 +26,4 @@ public class SysMenuUpdateDTO {
 
     private Integer orderNum;
 
-    private Boolean delFlag;
-
-
 }

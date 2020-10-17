@@ -1,22 +1,22 @@
 package com.lideng.sword.admin.service.impl;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
+
+import com.lideng.sword.admin.model.entity.MenuType;
+import com.lideng.sword.admin.model.entity.SysUser;
 import com.lideng.sword.admin.model.request.SysMenuCreateDTO;
 import com.lideng.sword.admin.model.request.SysMenuUpdateDTO;
-import com.lideng.sword.common.utils.IdWorker;
+import com.lideng.sword.admin.repository.MenuRepository;
+import com.lideng.sword.admin.repository.UserRepository;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.lideng.sword.admin.constant.SysConstants;
-import com.lideng.sword.admin.dao.SysMenuMapper;
 import com.lideng.sword.admin.model.entity.SysMenu;
 import com.lideng.sword.admin.service.SysMenuService;
 import org.springframework.transaction.annotation.Transactional;
-import javax.servlet.http.HttpServletRequest;
-import static com.lideng.sword.admin.constant.SysConstants.USERNAME;
 
 @Slf4j
 @Service
@@ -28,46 +28,41 @@ import static com.lideng.sword.admin.constant.SysConstants.USERNAME;
 public class SysMenuServiceImpl implements SysMenuService {
 
 	@Autowired
-	private SysMenuMapper sysMenuMapper;
+	private MenuRepository menuRepository;
 
 	@Autowired
-	private IdWorker idWorker;
+	private UserRepository userRepository;
+
 
 
 	@Override
-	public int create(SysMenuCreateDTO record, HttpServletRequest request) {
+	public String create(SysMenuCreateDTO record) {
 		SysMenu sysMenu =new SysMenu();
 		BeanUtils.copyProperties(record,sysMenu);
-		sysMenu.setId(idWorker.nextId() + "");
-		sysMenu.setCreateTime(new Date());
-		sysMenu.setCreateBy((String) request.getSession().getAttribute(USERNAME.getValue()));
 		sysMenu.setVersion(0);
-		return sysMenuMapper.insert(sysMenu);
+		return menuRepository.save(sysMenu).getId();
 
 	}
 
 	@Override
-	public int update(SysMenuUpdateDTO record, HttpServletRequest request) {
+	public String update(SysMenuUpdateDTO record) {
 
-		SysMenu sysMenu = sysMenuMapper.selectByPrimaryKey(record.getId());
+		SysMenu sysMenu = menuRepository.getOne(record.getId());
 		BeanUtils.copyProperties(record,sysMenu);
-		sysMenu.setLastUpdateBy((String) request.getSession().getAttribute(USERNAME.getValue()));
 		sysMenu.setVersion(sysMenu.getVersion()+1);
-        sysMenu.setLastUpdateTime(new Date());
-		log.info(sysMenu.toString());
-		return sysMenuMapper.updateByPrimaryKey(sysMenu);
+		return menuRepository.save(sysMenu).getId();
 	}
 
 
 	@Override
 	public int delete(List<String> ids) {
-		ids.forEach(id->sysMenuMapper.deleteByPrimaryKey(id));
+		ids.forEach(id->menuRepository.deleteById(id));
 		return ids.size();
 	}
 
 	@Override
 	public SysMenu findById(String id) {
-		return sysMenuMapper.selectByPrimaryKey(id);
+		return menuRepository.getOne(id);
 	}
 
 	@Override
@@ -77,6 +72,9 @@ public class SysMenuServiceImpl implements SysMenuService {
 		for (SysMenu menu : menus) {
 			if ("0".equals(menu.getParentId())) {
 				menu.setLevel(0);
+				menu.setKey(menu.getId());
+				menu.setValue(menu.getId());
+				menu.setTitle(menu.getName());
 				if(!exists(sysMenus, menu)) {
 					sysMenus.add(menu);
 				}
@@ -89,30 +87,34 @@ public class SysMenuServiceImpl implements SysMenuService {
 
 	@Override
 	public List<SysMenu> findByUser(String userName) {
-		if(userName == null || "".equals(userName) || SysConstants.ADMIN.getValue().equalsIgnoreCase(userName)) {
-			return sysMenuMapper.findAll();
+		if(StringUtils.isBlank(userName) || SysConstants.ADMIN.getValue().equalsIgnoreCase(userName)) {
+			return menuRepository.findAll();
 		}
-		return sysMenuMapper.findByUserName(userName);
+		SysUser byName = userRepository.findByName(userName).orElseThrow(NoSuchElementException::new);
+		return byName.getSysRole().getSysMenu();
 	}
 
 	private void findChildren(List<SysMenu> SysMenus, List<SysMenu> menus, int menuType) {
 		for (SysMenu SysMenu : SysMenus) {
 			List<SysMenu> children = new ArrayList<>();
 			for (SysMenu menu : menus) {
-				if(menuType == 1 && menu.getType() == 2) {
+				if(menuType == 1 && menu.getType() .equals(MenuType.BUTTON)) {
 					// 如果是获取类型不需要按钮，且菜单类型是按钮的，直接过滤掉
 					continue ;
 				}
 				if (SysMenu.getId() != null && SysMenu.getId().equals(menu.getParentId())) {
 					menu.setParentName(SysMenu.getName());
 					menu.setLevel(SysMenu.getLevel() + 1);
+					menu.setKey(menu.getId());
+					menu.setValue(menu.getId());
+					menu.setTitle(menu.getName());
 					if(!exists(children, menu)) {
 						children.add(menu);
 					}
 				}
 			}
 			SysMenu.setChildren(children);
-			children.sort((o1, o2) -> o1.getOrderNum().compareTo(o2.getOrderNum()));
+			children.sort(Comparator.comparing(com.lideng.sword.admin.model.entity.SysMenu::getOrderNum));
 			findChildren(children, menus, menuType);
 		}
 	}

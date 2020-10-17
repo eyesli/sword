@@ -1,14 +1,12 @@
 package com.lideng.sword.admin.service;
 
 import java.util.List;
-import java.util.Map;
 
 import com.lideng.sword.admin.model.entity.SysMenu;
 import com.lideng.sword.admin.model.entity.SysRole;
 import com.lideng.sword.admin.model.request.SysRoleCreateDTO;
 import com.lideng.sword.admin.model.request.SysRoleMenuCreateDTO;
 import com.lideng.sword.admin.model.request.SysRoleUpdateDTO;
-import javax.servlet.http.HttpServletRequest;
 
 
 /**
@@ -35,14 +33,16 @@ public interface SysRoleService {
 	 * @param records
 	 * @return
 	 */
-	int saveRoleMenus(List<SysRoleMenuCreateDTO> records,HttpServletRequest request);
+	int saveRoleMenus(SysRoleMenuCreateDTO records);
 
-	int create(SysRoleCreateDTO record, HttpServletRequest request);
+	SysRole create(SysRoleCreateDTO record);
 
-	int update(SysRoleUpdateDTO record, HttpServletRequest request);
+	SysRole update(SysRoleUpdateDTO record);
 
 	int delete(List<String> ids);
 
-	List<Map> findA();
+	void deleteById(String id);
+
+	List<SysRole>  findRoleByDepartmentId(String id);
 
 }
