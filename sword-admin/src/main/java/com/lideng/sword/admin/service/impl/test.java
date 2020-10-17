@@ -10,6 +10,7 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * @author lideng
@@ -28,22 +29,29 @@ public class test {
     @Autowired
     IdWorker idWorker;
     @Test
+    @Transactional
     public void getHello()  {
 
-        SysRole sysRoles = new SysRole();
-        sysRoles.setName("经理2");
-        sysRoles.setDelFlag(DelStatus.NORMAL);
-       // sysRoles.setDescription("2一般般权限");
-        sysRoles.setVersion(0);
-//        roleRepository.save(sysRoles);
 
-        SysUser sysUser1 = userRepository.findById("1260081237888995328").get();
+        for (int i = 0; i < 100; i++) {
+            roleRepository.a(i);
+            roleRepository.b(i);
+        }
 
-        SysRole sysRole = sysUser1.getSysRole();
-        System.out.println(sysRole);
-        SysUser sysUser = new SysUser();
-        sysUser.setName("sysRoles2");
-        sysUser.setVersion(0);
+//        SysRole sysRoles = new SysRole();
+//        sysRoles.setName("经理2");
+//        sysRoles.setDelFlag(DelStatus.NORMAL);
+//       // sysRoles.setDescription("2一般般权限");
+//        sysRoles.setVersion(0);
+////        roleRepository.save(sysRoles);
+//
+//        SysUser sysUser1 = userRepository.findById("1260081237888995328").get();
+//
+//        SysRole sysRole = sysUser1.getSysRole();
+//        System.out.println(sysRole);
+//        SysUser sysUser = new SysUser();
+//        sysUser.setName("sysRoles2");
+//        sysUser.setVersion(0);
       //  userRepository.save(sysUser);
 
 
