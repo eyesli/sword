@@ -1,6 +1,6 @@
 package com.lideng.sword.admin.config;
 
-import org.jetbrains.annotations.NotNull;
+
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.domain.AuditorAware;
 import org.springframework.security.core.context.SecurityContext;
@@ -19,7 +19,6 @@ public class AuditorConfig implements AuditorAware<String> {
      *
      * @return  返回操作员标志信息
      */
-    @NotNull
     @Override
     public Optional<String> getCurrentAuditor() {
         SecurityContext ctx = SecurityContextHolder.getContext();

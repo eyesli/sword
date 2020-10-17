@@ -11,7 +11,6 @@ import com.lideng.sword.admin.jpa.User;
 import com.lideng.sword.admin.jpa.UserDTO;
 import com.lideng.sword.admin.model.request.SysConfigSaveDTO;
 import com.lideng.sword.admin.model.request.SysConfigUpdateDTO;
-import com.lideng.sword.admin.repository.UserRepository;
 import com.lideng.sword.admin.util.SecurityUtils;
 import com.lideng.sword.common.utils.IdWorker;
 import lombok.extern.slf4j.Slf4j;
@@ -50,9 +49,6 @@ public class SysConfigServiceImpl  implements SysConfigService {
 
 	@Autowired
 	IdWorker idWorker;
-
-	@Autowired
-	UserRepository userRepository;
 
 	@Override
 	public int create(SysConfigSaveDTO sysConfigSaveDTO, HttpServletRequest request) {
@@ -102,14 +98,7 @@ public class SysConfigServiceImpl  implements SysConfigService {
 		//UserDTO userById = userRepository.findUserById(1L);
 		PageRequest pageRequest = PageRequest.of(0, 1);
 		//Page<List<UserDTO>> userById = userRepository.findUserById("1", UserDTO.class, pageRequest);
-
-
-
-		List<User> all = userRepository.findAll(createSpecification("stud1", "Tea wang"));
-		System.out.println(all);
-		List all1 = userRepository.findAll();
-
-		return all1;
+		return null;
 	}
 
 	@Override
@@ -118,23 +107,5 @@ public class SysConfigServiceImpl  implements SysConfigService {
 	}
 
 
-
-
-	private Specification<User> createSpecification(String username,String teachername) {
-
-		return (Root<User> root, CriteriaQuery<?> query, CriteriaBuilder cb)-> {
-
-			List<Predicate> predicateList = new ArrayList<>();
-
-			//predicateList.add(cb.equal(root.get("name").as(String.class), username));
-
-			//左连接
-			Join<User, Teacher> join = root.join("teachers", JoinType.LEFT);
-			predicateList.add(cb.equal(join.get("name"),teachername));
-
-			Predicate predicate =cb.and( predicateList.toArray(new Predicate[predicateList.size()]));
-			return query.where(predicate).getRestriction();
-		};
-	}
 
 }
