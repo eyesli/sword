@@ -5,6 +5,7 @@ import com.lideng.sword.admin.model.request.SysConfigSaveDTO;
 import com.lideng.sword.admin.model.request.SysConfigUpdateDTO;
 import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import com.lideng.sword.admin.service.SysConfigService;
@@ -19,6 +20,8 @@ import javax.servlet.http.HttpServletRequest;
 @RestController
 @RequestMapping("config")
 public class SysConfigController {
+//	@Autowired
+//	private KafkaTemplate<String,Object> kafkaTemplate;
 
 	@Autowired
 	private SysConfigService sysConfigService;
