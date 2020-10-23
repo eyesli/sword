@@ -3,6 +3,8 @@ package com.lideng.sword.admin.service.impl;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.*;
+
+import com.lideng.sword.admin.dao.SysRoleMenuMapper;
 import com.lideng.sword.admin.mq.Sender;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +26,8 @@ public class SysConfigServiceImpl  implements SysConfigService {
 
 	@Autowired
 	Sender sender;
+	@Autowired
+	SysRoleMenuMapper mapper;
 
 	@Autowired
 	private ApplicationContext applicationContext;
@@ -38,13 +42,13 @@ public class SysConfigServiceImpl  implements SysConfigService {
 	int i=0;
 	int j=0;
 	@Override
-	public String test(String label) {
+	public String test( ) {
 		// 循环查询订单库
 
 		Thread T1 = new Thread(()->{
 			while(j<100000){
 				// 查询订单库
-				a.add("aaa"+j++);
+				a.add(mapper.sa(i));
 				// 等待
 				try {
 					barrier.await();
@@ -59,6 +63,7 @@ public class SysConfigServiceImpl  implements SysConfigService {
 
 			while(i<100000){
 				// 查询运单库
+
 				b.add("bbb"+i++);
 				// 等待
 				try {
