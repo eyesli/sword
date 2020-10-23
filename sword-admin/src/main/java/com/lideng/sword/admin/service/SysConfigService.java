@@ -7,6 +7,7 @@ import com.lideng.sword.admin.model.entity.SysConfig;
 
 import com.lideng.sword.admin.model.request.SysConfigSaveDTO;
 import com.lideng.sword.admin.model.request.SysConfigUpdateDTO;
+import org.springframework.stereotype.Service;
 
 
 /**
@@ -14,8 +15,9 @@ import com.lideng.sword.admin.model.request.SysConfigUpdateDTO;
  * @author lideng
  * @date July 30, 2019
  */
+@Service
 public interface SysConfigService  {
 
-	String test (String label);
+	String test ( );
 
 }
