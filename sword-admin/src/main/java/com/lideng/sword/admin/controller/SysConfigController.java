@@ -3,7 +3,6 @@ package com.lideng.sword.admin.controller;
 import java.util.List;
 import com.lideng.sword.admin.model.request.SysConfigSaveDTO;
 import com.lideng.sword.admin.model.request.SysConfigUpdateDTO;
-import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.web.bind.annotation.*;
