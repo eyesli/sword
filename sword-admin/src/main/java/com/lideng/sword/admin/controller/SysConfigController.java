@@ -24,13 +24,11 @@ public class SysConfigController {
 
 	@Autowired
 	private SysConfigService sysConfigService;
-	
-
-//	@RequestMapping(value="/create",method = RequestMethod.POST)
-//	public HttpResult create(@RequestBody SysConfigSaveDTO record) {
-//		return HttpResult.ok(sysConfigService.create(record),"创建成功");
-//	}
 
 
+	@RequestMapping(value="/create",method = RequestMethod.POST)
+	public HttpResult create() {
+		return HttpResult.ok(sysConfigService.test(),"创建成功");
+	}
 
 }
