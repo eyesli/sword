@@ -2,10 +2,11 @@ package com.lideng.sword.admin.dao;
 
 
 import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Component;
 
-@Component
+@Mapper
 public interface SysRoleMenuMapper {
 
 	@Insert("insert into a(a) value (#{a})")

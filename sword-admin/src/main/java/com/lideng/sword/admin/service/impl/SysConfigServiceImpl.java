@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.concurrent.*;
 
 import com.lideng.sword.admin.dao.SysRoleMenuMapper;
-import com.lideng.sword.admin.mq.Sender;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
@@ -23,14 +22,8 @@ import org.springframework.transaction.annotation.Transactional;
 public class SysConfigServiceImpl  implements SysConfigService {
 
 
-
 	@Autowired
-	Sender sender;
-	@Autowired
-	SysRoleMenuMapper mapper;
-
-	@Autowired
-	private ApplicationContext applicationContext;
+	private SysRoleMenuMapper mapper;
 
 
 	List<String> a =new ArrayList< >(1);

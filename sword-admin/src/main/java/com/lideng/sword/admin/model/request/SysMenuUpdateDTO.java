@@ -1,6 +1,6 @@
 package com.lideng.sword.admin.model.request;
 
-import io.swagger.annotations.ApiModelProperty;
+
 import lombok.Data;
 
 /**
@@ -17,7 +17,6 @@ public class SysMenuUpdateDTO {
 
     private String url;
 
-    @ApiModelProperty(notes = "权限标识")
     private String perms;
 
     private Integer type;
