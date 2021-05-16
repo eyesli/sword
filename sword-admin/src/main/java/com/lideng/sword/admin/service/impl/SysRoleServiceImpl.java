@@ -72,7 +72,7 @@ public class SysRoleServiceImpl  implements SysRoleService {
 
 	@Override
 	public int delete(List<String> ids) {
-		//todo  一场补货
+		//todo
 		ids.forEach(id->roleRepository.deleteById(id));
 		return ids.size();
 	}

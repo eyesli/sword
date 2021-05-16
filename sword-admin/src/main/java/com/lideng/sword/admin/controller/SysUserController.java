@@ -29,6 +29,10 @@ public class SysUserController {
 		return HttpResult.ok(sysUserService.create(record),"创建成功");
 	}
 
+	public static void main(String[] args) {
+		System.out.println(123);
+	}
+
 	////@PreAuthorize("hasAuthority('sys:user:add') AND hasAuthority('sys:user:edit')")
     @RequestMapping(value="/update",method = RequestMethod.POST)
 	public HttpResult update(@RequestBody SysUserUpdateDTO record) {

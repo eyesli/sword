@@ -24,7 +24,7 @@ import io.jsonwebtoken.SignatureAlgorithm;
  * @author lideng
  * @date July 30, 2019
  */
-public class JwtTokenUtils implements Serializable {
+public class  JwtTokenUtils implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	
