@@ -1,18 +1,17 @@
-server:
-  port: 8001
 spring:
-  datasource:
-    driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/sword?characterEncoding=utf8&useSSL=false&serverTimezone=Asia/Shanghai&rewriteBatchedStatements=true
-    username: root
-    password: root
   application:
     name: sword
   cloud:
     nacos:
       config:
         server-addr: 127.0.0.1:8848
+        file-extension: yml
+        namespace: 9e64b224-8ec6-4916-84ea-e2687aff0e83
       discovery:
         server-addr: 127.0.0.1:8848
+        namespace: 9e64b224-8ec6-4916-84ea-e2687aff0e83
+  profiles:
+    active: dev
+
 
 
