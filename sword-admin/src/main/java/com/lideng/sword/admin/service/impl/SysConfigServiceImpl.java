@@ -9,7 +9,6 @@ import com.lideng.sword.admin.event.UserEvent;
 import com.lideng.sword.admin.model.entity.*;
 import com.lideng.sword.admin.model.request.SysConfigSaveDTO;
 import com.lideng.sword.admin.model.request.SysConfigUpdateDTO;
-import com.lideng.sword.admin.mq.Sender;
 import com.lideng.sword.admin.repository.ConfigRepository;
 import com.lideng.sword.admin.repository.MenuRepository;
 import com.lideng.sword.admin.repository.RoleRepository;
@@ -49,8 +48,6 @@ public class SysConfigServiceImpl  implements SysConfigService {
 	@Autowired
 	ConfigRepository configRepository;
 
-	@Autowired
-	Sender sender;
 
 	@Autowired
 	private ApplicationContext applicationContext;

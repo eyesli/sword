@@ -3,7 +3,6 @@ package com.lideng.sword.admin.controller;
 import java.util.List;
 import com.lideng.sword.admin.model.request.SysConfigSaveDTO;
 import com.lideng.sword.admin.model.request.SysConfigUpdateDTO;
-import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.web.bind.annotation.*;
@@ -39,7 +38,7 @@ public class SysConfigController {
 
 	//@PreAuthorize("hasAuthority('sys:config:delete')")
 	@RequestMapping(value="/delete",method = RequestMethod.POST)
-	public HttpResult delete(@ApiParam(value = "只用传ID")@RequestBody List<String> ids) {
+	public HttpResult delete(@RequestBody List<String> ids) {
 		return HttpResult.ok(sysConfigService.delete(ids),"删除成功");
 	}
 

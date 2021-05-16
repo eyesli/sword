@@ -4,7 +4,6 @@ import java.util.List;
 import com.lideng.sword.admin.model.request.SysRoleCreateDTO;
 import com.lideng.sword.admin.model.request.SysRoleMenuCreateDTO;
 import com.lideng.sword.admin.model.request.SysRoleUpdateDTO;
-import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -40,7 +39,7 @@ public class SysRoleController {
 
 	////@PreAuthorize("hasAuthority('sys:role:delete')")
 	@RequestMapping(value="/delete",method = RequestMethod.GET)
-	public HttpResult delete(@ApiParam(value = "只用传ID")@RequestParam String id) {
+	public HttpResult delete(@RequestParam String id) {
 		sysRoleService.deleteById(id);
 		return HttpResult.ok(200,"删除成功");
 	}

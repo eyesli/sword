@@ -2,6 +2,10 @@ server:
   port: 8001
 
 spring:
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848
   datasource:
     name: druidDataSource
     type: com.alibaba.druid.pool.DruidDataSource

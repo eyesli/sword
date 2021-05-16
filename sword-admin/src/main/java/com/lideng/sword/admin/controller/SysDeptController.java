@@ -4,7 +4,6 @@ import java.util.List;
 
 import com.lideng.sword.admin.model.request.SysDeptCreateDTO;
 import com.lideng.sword.admin.model.request.SysDeptUpdateDTO;
-import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -38,7 +37,7 @@ public class SysDeptController {
 
 	////@PreAuthorize("hasAuthority('sys:dept:delete')")
 	@RequestMapping(value="/delete",method = RequestMethod.GET)
-	public HttpResult delete(@ApiParam(value = "只用传ID")@RequestParam String id) {
+	public HttpResult delete(@RequestParam String id) {
 		sysDeptService.delete(id);
 		return HttpResult.ok(200,"删除成功");
 	}

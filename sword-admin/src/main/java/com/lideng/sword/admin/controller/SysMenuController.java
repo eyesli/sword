@@ -4,7 +4,6 @@ import java.util.List;
 
 import com.lideng.sword.admin.model.request.SysMenuCreateDTO;
 import com.lideng.sword.admin.model.request.SysMenuUpdateDTO;
-import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -40,7 +39,7 @@ public class SysMenuController {
 
 	//@PreAuthorize("hasAuthority('sys:menu:delete')")
 	@RequestMapping(value="/delete",method = RequestMethod.POST)
-	public HttpResult delete(@ApiParam(value = "只用传ID")@RequestBody List<String> ids) {
+	public HttpResult delete(@RequestBody List<String> ids) {
 		return HttpResult.ok(sysMenuService.delete(ids));
 	}
 

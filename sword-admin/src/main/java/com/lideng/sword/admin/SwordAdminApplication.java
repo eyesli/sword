@@ -1,5 +1,6 @@
 package com.lideng.sword.admin;
 
+import com.alibaba.nacos.spring.context.annotation.config.NacosPropertySource;
 import com.lideng.sword.common.utils.IdWorker;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -14,6 +15,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
  */
 @SpringBootApplication(exclude = {DataSourceAutoConfiguration.class})
 @EnableJpaAuditing
+@NacosPropertySource(dataId = "999", autoRefreshed = true)
 public class SwordAdminApplication {
 
 	public static void main(String[] args) {

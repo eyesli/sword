@@ -3,7 +3,6 @@ package com.lideng.sword.admin.controller;
 import java.util.List;
 import com.lideng.sword.admin.model.request.SysDictCreateDTO;
 import com.lideng.sword.admin.model.request.SysDictUpdateDTO;
-import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -37,7 +36,7 @@ public class SysDictController {
 
 	//@PreAuthorize("hasAuthority('sys:dict:delete')")
 	@PostMapping(value="/delete")
-	public HttpResult delete(@ApiParam(value = "只用传ID")@RequestBody List<String> ids) {
+	public HttpResult delete(@RequestBody List<String> ids) {
 		return HttpResult.ok(sysDictService.delete(ids));
 	}
 

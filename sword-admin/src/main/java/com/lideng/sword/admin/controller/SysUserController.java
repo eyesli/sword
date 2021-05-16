@@ -4,7 +4,6 @@ import java.util.List;
 
 import com.lideng.sword.admin.model.request.SysUserCreateDTO;
 import com.lideng.sword.admin.model.request.SysUserUpdateDTO;
-import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -29,9 +28,6 @@ public class SysUserController {
 		return HttpResult.ok(sysUserService.create(record),"创建成功");
 	}
 
-	public static void main(String[] args) {
-		System.out.println(123);
-	}
 
 	////@PreAuthorize("hasAuthority('sys:user:add') AND hasAuthority('sys:user:edit')")
     @RequestMapping(value="/update",method = RequestMethod.POST)
@@ -47,7 +43,7 @@ public class SysUserController {
 
 
 	@RequestMapping(value="/delete",method = RequestMethod.GET)
-	public HttpResult delete(@ApiParam(value = "只用传ID")@RequestParam String id) {
+	public HttpResult delete(@RequestParam String id) {
 		sysUserService.deleteById(id);
 		return HttpResult.ok(200,"删除成功");
 	}
